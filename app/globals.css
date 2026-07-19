@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #FBF6EC;
+  --foreground: #12141A;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Circular badge text (CBAAC-seal style ring) */
+.badge-ring {
+  animation: spin-slow 24s linear infinite;
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .badge-ring { animation: none; }
+}
