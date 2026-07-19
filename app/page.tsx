@@ -100,7 +100,7 @@ export default function Home() {
             alt="The Africa Heritage Tour, presented by CBAAC and Wakanow"
             width={1330}
             height={1600}
-            className="mx-auto mt-10 h-auto w-92 sm:w-126"
+            className="mx-auto mt-10 h-auto w-72 sm:w-96"
           />
 
           <p className="mx-auto mt-10 max-w-xl text-parchment/90">
