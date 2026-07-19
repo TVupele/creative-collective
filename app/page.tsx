@@ -100,7 +100,7 @@ export default function Home() {
             alt="The Africa Heritage Tour, presented by CBAAC and Wakanow"
             width={1330}
             height={1600}
-            className="mx-auto mt-10 h-auto w-52 sm:w-64"
+            className="mx-auto mt-10 h-auto w-92 sm:w-126"
           />
 
           <p className="mx-auto mt-10 max-w-xl text-parchment/90">
@@ -118,10 +118,10 @@ export default function Home() {
           </p>
 
           <Image
-            src="/patterns/wakanow-logo.png"
+            src="/patterns/wakanow.png"
             alt="Wakanow"
-            width={1132}
-            height={349}
+            width={1075}
+            height={283}
             className="mx-auto mt-6 h-auto w-40"
           />
 
