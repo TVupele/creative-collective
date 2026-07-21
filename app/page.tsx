@@ -10,55 +10,85 @@ export default function Home() {
         <WaitlistBanner />
       </Suspense>
 
-      {/* Hero top band — solid black, headline locked to one line */}
-      <div className="bg-ink px-4 py-5 text-center sm:py-7">
-        <h1 className="whitespace-nowrap font-display text-[5.5vw] font-bold text-parchment sm:text-3xl md:text-4xl">
-          One Continent. One Diaspora.
-        </h1>
-      </div>
+      {/* Hero — kente background image with text positioned to match reference exactly */}
+      <section className="relative w-full">
+        <Image
+          src="/patterns/kente-hero.jpg"
+          alt="Kente pattern background"
+          width={1535}
+          height={1600}
+          className="h-auto w-full"
+          priority
+        />
 
-      {/* Hero — kente-pattern section */}
-      <section className="relative bg-hero bg-cover bg-center px-6 py-16 text-center sm:py-24">
-        <div className="relative mx-auto max-w-2xl">
+        {/* One Continent. One Diaspora. */}
+        <div className="absolute inset-x-0 top-[21.4%] -translate-y-1/2 px-4 text-center">
+          <h1 className="whitespace-nowrap font-display text-[4.3vw] font-bold text-parchment sm:text-2xl md:text-3xl">
+            One Continent. One Diaspora.
+          </h1>
+        </div>
+
+        {/* CBAAC seal */}
+        <div className="absolute left-[30.3%] top-[26.75%] w-[39.4%]">
           <Image
             src="/patterns/cbaac-seal.jpg"
             alt="Centre for Black and African Arts and Civilization (CBAAC) seal"
             width={420}
             height={420}
-            className="mx-auto h-56 w-56 rounded-full shadow-2xl sm:h-72 sm:w-72"
+            className="h-auto w-full rounded-full shadow-2xl"
           />
+        </div>
 
-          <p className="mx-auto mt-10 max-w-xl text-lg text-parchment drop-shadow-md">
+        {/* presents */}
+        <div className="absolute inset-x-0 top-[70.2%] -translate-y-1/2 px-4 text-center">
+          <p className="text-[1.7vw] text-parchment drop-shadow-md sm:text-sm md:text-base">
             The Centre for Black and African Arts and Civilization (CBAAC).
-            <br />
+          </p>
+        </div>
+        <div className="absolute inset-x-0 top-[73.2%] -translate-y-1/2 px-4 text-center">
+          <p className="text-[1.7vw] text-parchment drop-shadow-md sm:text-sm md:text-base">
             presents:
           </p>
-          <h2 className="mx-auto mt-6 max-w-2xl font-display text-2xl font-bold text-parchment drop-shadow-md sm:text-4xl">
+        </div>
+
+        {/* Journey heading */}
+        <div className="absolute inset-x-0 top-[82.7%] -translate-y-1/2 px-6 text-center">
+          <h2 className="font-display text-[2.5vw] font-bold text-parchment drop-shadow-md sm:text-lg md:text-2xl">
             The Official Continental Journey to FESTAC@50.
           </h2>
+        </div>
+
+        {/* Buttons */}
+        <div className="absolute top-[90.6%] left-[24.8%] w-[24.3%] -translate-y-1/2">
           <a
-            href="#heritage-tour"
-            className="mt-8 inline-block border border-ink/10 bg-amber px-8 py-3 font-mono text-sm lowercase tracking-wide text-ink shadow-lg transition hover:bg-gold"
+            href="https://cbaac.gov.ng/programs/road2festac"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block w-full border border-ink/10 bg-amber py-2 text-center font-mono text-[1.4vw] lowercase tracking-wide text-ink shadow-lg transition hover:bg-gold sm:text-xs md:text-sm"
           >
-            explore heritage tours
+            find out more
           </a>
+        </div>
+        <div className="absolute top-[90.6%] left-[50.9%] w-[24.2%] -translate-y-1/2">
+          <Link
+            href="/join"
+            className="block w-full border border-ink/10 bg-amber py-2 text-center font-mono text-[1.4vw] lowercase tracking-wide text-ink shadow-lg transition hover:bg-gold sm:text-xs md:text-sm"
+          >
+            join the collective
+          </Link>
         </div>
       </section>
 
       {/* Creative Collective — flat dark section */}
-      <section className="relative bg-charcoal px-6 py-20 text-center">
+      <section className="relative bg-collective bg-cover bg-center px-6 py-20 text-center">
         <div className="relative mx-auto max-w-2xl">
           <Image
             src="/patterns/creative-collective-logo.png"
-            alt="Creative Collective"
+            alt="Creative Collective Africa"
             width={1600}
-            height={783}
+            height={1045}
             className="mx-auto h-auto w-72 sm:w-80"
           />
-
-          <p className="mt-1 text-sm font-semibold uppercase tracking-[0.3em] text-amber">
-            Africa
-          </p>
 
           <p className="mx-auto mt-6 max-w-xl text-parchment/90">
             Join Africa&apos;s largest community of creatives shaping the Road to FESTAC and
