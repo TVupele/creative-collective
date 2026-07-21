@@ -11,15 +11,16 @@ export default function Home() {
       </Suspense>
 
       {/* Hero — kente background image with text positioned to match reference exactly */}
-      <section className="relative w-full">
-        <Image
-          src="/patterns/kente-hero.jpg"
-          alt="Kente pattern background"
-          width={1535}
-          height={1600}
-          className="h-auto w-full"
-          priority
-        />
+      <section className="relative flex min-h-screen w-full flex-col bg-ink">
+        <div className="relative w-full">
+          <Image
+            src="/patterns/kente-hero.jpg"
+            alt="Kente pattern background"
+            width={1535}
+            height={1600}
+            className="h-auto w-full"
+            priority
+          />
 
         {/* One Continent. One Diaspora. */}
         <div className="absolute inset-x-0 top-[21.4%] -translate-y-1/2 px-4 text-center">
@@ -58,24 +59,17 @@ export default function Home() {
           </h2>
         </div>
 
-        {/* Buttons */}
-        <div className="absolute top-[90.6%] left-[24.8%] w-[24.3%] -translate-y-1/2">
+        {/* Button */}
+        <div className="absolute inset-x-0 top-[90.6%] -translate-y-1/2 px-4 text-center">
           <a
             href="https://cbaac.gov.ng/programs/road2festac"
             target="_blank"
             rel="noopener noreferrer"
-            className="block w-full border border-ink/10 bg-amber py-2 text-center font-mono text-[1.4vw] lowercase tracking-wide text-ink shadow-lg transition hover:bg-gold sm:text-xs md:text-sm"
+            className="inline-block border border-ink/10 bg-amber px-8 py-2 font-mono text-[1.6vw] lowercase tracking-wide text-ink shadow-lg transition hover:bg-gold sm:text-xs md:text-sm"
           >
             find out more
           </a>
         </div>
-        <div className="absolute top-[90.6%] left-[50.9%] w-[24.2%] -translate-y-1/2">
-          <Link
-            href="/join"
-            className="block w-full border border-ink/10 bg-amber py-2 text-center font-mono text-[1.4vw] lowercase tracking-wide text-ink shadow-lg transition hover:bg-gold sm:text-xs md:text-sm"
-          >
-            join the collective
-          </Link>
         </div>
       </section>
 
@@ -126,11 +120,19 @@ export default function Home() {
           </h2>
 
           <Image
-            src="/patterns/africa.png"
-            alt="The Africa Heritage Tour, presented by CBAAC and Wakanow"
-            width={1330}
-            height={1600}
-            className="mx-auto mt-10 h-auto w-72 sm:w-96"
+            src="/patterns/cbaac-header.png"
+            alt="The Centre for Black and African Arts and Civilizations (CBAAC) presents:"
+            width={1471}
+            height={200}
+            className="mx-auto mt-10 h-auto w-full max-w-md"
+          />
+
+          <Image
+            src="/patterns/africa-heritage-tour.png"
+            alt="The Africa Heritage Tour, presented by Wakanow"
+            width={4555}
+            height={5753}
+            className="mx-auto mt-6 h-auto w-[85%] max-w-md sm:w-[75%]"
           />
 
           <p className="mx-auto mt-10 max-w-xl text-parchment/90">
