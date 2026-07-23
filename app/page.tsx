@@ -47,13 +47,13 @@ export default function Home() {
             alt="The Centre for Black and African Arts and Civilizations (CBAAC) presents:"
             width={1471}
             height={200}
-            className="mx-auto h-auto w-full max-w-xs sm:max-w-sm"
+            className="mx-auto h-auto w-full max-w-[13rem] sm:max-w-[19rem]"
           />
         </div>
 
         {/* Journey heading — centered in the red band */}
         <div className="absolute inset-x-0 top-[88.5%] -translate-y-1/2 px-6 text-center">
-          <h2 className="font-display text-[2.5vw] font-bold text-parchment drop-shadow-md sm:text-lg md:text-2xl">
+          <h2 className="font-display text-[4.3vw] font-bold text-parchment drop-shadow-md sm:text-2xl md:text-3xl">
             The Official Continental Journey to FESTAC@50.
           </h2>
         </div>
@@ -74,7 +74,7 @@ export default function Home() {
             Join Africa&apos;s official continental journey to FESTAC@50.
           </p>
 
-          <p className="mt-8 text-base font-semibold uppercase tracking-widest text-amber sm:text-lg">
+          <p className="mt-8 text-[3.2vw] font-semibold uppercase tracking-wide text-amber sm:text-lg sm:tracking-widest">
             Connect . Create . Travel . Celebrate
           </p>
 
@@ -94,7 +94,7 @@ export default function Home() {
         </div>
 
         {/* Decorative chevron trim — separate fixed-height strip, never overlaps content above */}
-        <div className="relative mt-16 w-full">
+        <div className="relative -mx-6 mt-16">
           <Image
             src="/patterns/festac-chevron.png"
             alt=""
@@ -106,30 +106,34 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Creative Collective — flat dark section */}
-      <section className="relative bg-collective bg-cover bg-center px-6 py-20 text-center">
+      {/* Creative Collective — orange section with brown bullet band */}
+      <section className="relative bg-saffron px-6 py-20 text-center">
         <div className="relative mx-auto max-w-2xl">
           <Image
             src="/patterns/creative-collective-logo.png"
             alt="Creative Collective Africa"
-            width={1600}
-            height={1045}
+            width={2051}
+            height={1385}
             className="mx-auto h-auto w-72 sm:w-80"
           />
 
-          <p className="mx-auto mt-6 max-w-xl text-parchment/90">
+          <p className="mx-auto mt-6 max-w-xl text-ink/80">
             Join Africa&apos;s largest community of creatives shaping the Road to FESTAC and
             FESTAC@50.
           </p>
+        </div>
 
-          <ul className="mx-auto mt-6 max-w-xl space-y-1 text-parchment/90">
+        <div className="relative -mx-6 mt-6 bg-cocoa px-6 py-4">
+          <ul className="mx-auto max-w-xl space-y-1 text-parchment/95">
             <li>. CREATE: Collaborate with creatives across Africa.</li>
             <li>. PERFORM: Participate in official events.</li>
             <li>. TRAVEL: Gain access to heritage tours.</li>
             <li>. EARN: Access commissions, opportunities and partnerships.</li>
           </ul>
+        </div>
 
-          <p className="mx-auto mt-8 max-w-xl text-parchment/90">
+        <div className="relative mx-auto max-w-2xl">
+          <p className="mx-auto mt-8 max-w-xl text-ink/80">
             Join creatives from across Africa and the Diaspora preparing for FESTAC@50.
           </p>
 

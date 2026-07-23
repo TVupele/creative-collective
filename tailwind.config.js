@@ -15,6 +15,8 @@ module.exports = {
         amber: '#E8A23A',
         clay: '#B4491F',
         charcoal: '#211F1E',
+        saffron: '#E8862E',
+        cocoa: '#8B5A2E',
       },
       fontFamily: {
         display: ['var(--font-display)', 'sans-serif'],
