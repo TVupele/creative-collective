@@ -204,14 +204,7 @@ export default function Home() {
           alt="Creative Collective is the official creative industries mobilization platform for Road to FESTAC and FESTAC@50."
           width={2677}
           height={184}
-          className="mx-auto h-auto w-full max-w-md"
-        />
-        <Image
-          src="/patterns/communify-logo.png"
-          alt="Communify"
-          width={1600}
-          height={489}
-          className="mx-auto mt-6 h-auto w-64 sm:w-72"
+          className="mx-auto h-auto w-full max-w-xl"
         />
       </footer>
     </main>
