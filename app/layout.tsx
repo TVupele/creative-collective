@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${display.variable} ${body.variable} ${mono.variable} font-body bg-white text-ink antialiased`}
+        className={`${display.variable} ${body.variable} ${mono.variable} font-mono bg-ink text-ink antialiased`}
       >
         {children}
       </body>

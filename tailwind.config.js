@@ -27,6 +27,7 @@ module.exports = {
         tribal: "url('/patterns/tribal-full.jpg')",
         hero: "url('/patterns/hero-pattern.png')",
         collective: "url('/patterns/collective-bg.png')",
+        festac: "url('/patterns/festac-bg.jpg')",
       },
     },
   },

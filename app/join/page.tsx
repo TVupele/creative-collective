@@ -92,7 +92,7 @@ export default function JoinPage() {
           <Link href="/" className="text-xs uppercase tracking-widest text-parchment/60 hover:text-parchment">
             &larr; Back to Creative Collective
           </Link>
-          <h1 className="mt-4 font-display text-3xl font-semibold text-parchment sm:text-4xl">
+          <h1 className="mt-4 text-3xl font-semibold text-parchment sm:text-4xl">
             Join the Collective
           </h1>
           <p className="mt-3 text-parchment/80">
@@ -112,7 +112,7 @@ export default function JoinPage() {
               <span className="text-xs font-semibold uppercase tracking-widest text-clay">
                 Category 1
               </span>
-              <h2 className="mt-2 font-display text-2xl font-semibold">
+              <h2 className="mt-2 text-2xl font-semibold">
                 Creative &amp; Entertainer
               </h2>
               <p className="mt-2 text-sm text-ink/70">
@@ -131,7 +131,7 @@ export default function JoinPage() {
               <span className="text-xs font-semibold uppercase tracking-widest text-navy">
                 Category 2
               </span>
-              <h2 className="mt-2 font-display text-2xl font-semibold">
+              <h2 className="mt-2 text-2xl font-semibold">
                 A-List &amp; Veteran
               </h2>
               <p className="mt-2 text-sm text-ink/70">
@@ -154,7 +154,7 @@ export default function JoinPage() {
             </button>
 
             <div className="rounded-xl border border-goldDeep/20 bg-white p-6 shadow-sm">
-              <h3 className="font-display text-xl font-semibold">
+              <h3 className="text-xl font-semibold">
                 {category === "creative" ? "Creative & Entertainer details" : "A-List & Veteran details"}
               </h3>
 
@@ -244,7 +244,7 @@ export default function JoinPage() {
 
             {category === "creative" ? (
               <div className="rounded-xl border border-goldDeep/20 bg-white p-6 shadow-sm">
-                <h3 className="font-display text-xl font-semibold">A bit more about your practice</h3>
+                <h3 className="text-xl font-semibold">A bit more about your practice</h3>
                 <div className="mt-5 grid gap-4 sm:grid-cols-2">
                   <Field label="Years active">
                     <input
@@ -275,7 +275,7 @@ export default function JoinPage() {
               </div>
             ) : (
               <div className="rounded-xl border border-goldDeep/20 bg-white p-6 shadow-sm">
-                <h3 className="font-display text-xl font-semibold">Professional details</h3>
+                <h3 className="text-xl font-semibold">Professional details</h3>
                 <div className="mt-5 grid gap-4 sm:grid-cols-2">
                   <Field label="Stage / professional name">
                     <input

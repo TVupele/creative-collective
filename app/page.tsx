@@ -5,22 +5,21 @@ import WaitlistBanner from "@/components/WaitlistBanner";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-dvh w-full bg-ink">
       <Suspense fallback={null}>
         <WaitlistBanner />
       </Suspense>
 
       {/* Hero — kente background image with text positioned to match reference exactly */}
-      <section className="relative flex min-h-screen w-full flex-col bg-ink">
-        <div className="relative w-full">
-          <Image
-            src="/patterns/kente-hero.jpg"
-            alt="Kente pattern background"
-            width={1535}
-            height={1600}
-            className="h-auto w-full"
-            priority
-          />
+      <section className="relative w-full bg-ink">
+        <Image
+          src="/patterns/kente-hero.jpg"
+          alt="Kente pattern background"
+          width={1535}
+          height={1600}
+          className="h-auto w-full"
+          priority
+        />
 
         {/* One Continent. One Diaspora. */}
         <div className="absolute inset-x-0 top-[21.4%] -translate-y-1/2 px-4 text-center">
@@ -37,39 +36,73 @@ export default function Home() {
             width={420}
             height={420}
             className="h-auto w-full rounded-full shadow-2xl"
+            priority
           />
         </div>
 
-        {/* presents */}
-        <div className="absolute inset-x-0 top-[70.2%] -translate-y-1/2 px-4 text-center">
-          <p className="text-[1.7vw] text-parchment drop-shadow-md sm:text-sm md:text-base">
-            The Centre for Black and African Arts and Civilization (CBAAC).
-          </p>
-        </div>
-        <div className="absolute inset-x-0 top-[73.2%] -translate-y-1/2 px-4 text-center">
-          <p className="text-[1.7vw] text-parchment drop-shadow-md sm:text-sm md:text-base">
-            presents:
-          </p>
+        {/* presents — CBAAC header image, centered in the green band */}
+        <div className="absolute inset-x-0 top-[71.3%] -translate-y-1/2 px-6">
+          <Image
+            src="/patterns/cbaac-header.png"
+            alt="The Centre for Black and African Arts and Civilizations (CBAAC) presents:"
+            width={1471}
+            height={200}
+            className="mx-auto h-auto w-full max-w-xs sm:max-w-sm"
+          />
         </div>
 
-        {/* Journey heading */}
-        <div className="absolute inset-x-0 top-[82.7%] -translate-y-1/2 px-6 text-center">
+        {/* Journey heading — centered in the red band */}
+        <div className="absolute inset-x-0 top-[88.5%] -translate-y-1/2 px-6 text-center">
           <h2 className="font-display text-[2.5vw] font-bold text-parchment drop-shadow-md sm:text-lg md:text-2xl">
             The Official Continental Journey to FESTAC@50.
           </h2>
         </div>
+      </section>
 
-        {/* Button */}
-        <div className="absolute inset-x-0 top-[90.6%] -translate-y-1/2 px-4 text-center">
+      {/* Road to FESTAC'77 */}
+      <section className="relative bg-ink px-6 pb-0 pt-16 text-center sm:pt-24">
+        <div className="relative mx-auto max-w-xl">
+          <Image
+            src="/patterns/festac-logo.png"
+            alt="Road to FESTAC'77 — 50 years"
+            width={5091}
+            height={5091}
+            className="mx-auto h-auto w-64 sm:w-80"
+          />
+
+          <p className="mx-auto mt-8 max-w-md text-base text-parchment/90 sm:text-lg">
+            Join Africa&apos;s official continental journey to FESTAC@50.
+          </p>
+
+          <p className="mt-8 text-base font-semibold uppercase tracking-widest text-amber sm:text-lg">
+            Connect . Create . Travel . Celebrate
+          </p>
+
+          <p className="mx-auto mt-6 max-w-md text-base text-parchment/90 sm:text-lg">
+            Join thousands of creatives, entrepreneurs, tourists and cultural enthusiasts
+            across Africa and the Diaspora.
+          </p>
+
           <a
             href="https://cbaac.gov.ng/programs/road2festac"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block border border-ink/10 bg-amber px-8 py-2 font-mono text-[1.6vw] lowercase tracking-wide text-ink shadow-lg transition hover:bg-gold sm:text-xs md:text-sm"
+            className="mt-10 inline-block border border-ink/10 bg-amber px-10 py-3 font-mono text-sm lowercase tracking-wide text-ink shadow-lg transition hover:bg-gold"
           >
             find out more
           </a>
         </div>
+
+        {/* Decorative chevron trim — separate fixed-height strip, never overlaps content above */}
+        <div className="relative mt-16 w-full">
+          <Image
+            src="/patterns/festac-chevron.png"
+            alt=""
+            aria-hidden
+            width={1600}
+            height={243}
+            className="h-auto w-full"
+          />
         </div>
       </section>
 
@@ -113,19 +146,11 @@ export default function Home() {
       <section id="heritage-tour" className="relative bg-tribal bg-cover bg-center px-6 py-20 text-center">
         <div className="absolute inset-0 bg-ink/45" aria-hidden />
         <div className="relative mx-auto max-w-2xl">
-          <h2 className="font-display text-3xl font-bold text-parchment sm:text-4xl">
+          <h2 className="text-3xl font-bold text-parchment sm:text-4xl">
             Discover Africa
             <br />
             Through the Africa Heritage Tour
           </h2>
-
-          <Image
-            src="/patterns/cbaac-header.png"
-            alt="The Centre for Black and African Arts and Civilizations (CBAAC) presents:"
-            width={1471}
-            height={200}
-            className="mx-auto mt-10 h-auto w-full max-w-md"
-          />
 
           <Image
             src="/patterns/africa-heritage-tour.png"
