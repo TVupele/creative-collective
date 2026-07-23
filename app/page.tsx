@@ -47,7 +47,7 @@ export default function Home() {
             alt="The Centre for Black and African Arts and Civilizations (CBAAC) presents:"
             width={1471}
             height={200}
-            className="mx-auto h-auto w-full max-w-[13rem] sm:max-w-[19rem]"
+            className="mx-auto h-auto w-full max-w-[17rem] sm:max-w-[24rem]"
           />
         </div>
 
@@ -183,7 +183,7 @@ export default function Home() {
             alt="Wakanow"
             width={1075}
             height={283}
-            className="mx-auto mt-6 h-auto w-40"
+            className="mx-auto mt-6 h-auto w-28"
           />
 
           <a
@@ -199,10 +199,13 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="bg-ink px-6 py-12 text-center">
-        <p className="text-sm text-parchment/70">Creative Collective is a division of Communify.</p>
-        <p className="text-sm text-parchment/70">
-          Official execution partner to CBAAC for Road to FESTAC and FESTAC@50.
-        </p>
+        <Image
+          src="/patterns/footer-text.png"
+          alt="Creative Collective is the official creative industries mobilization platform for Road to FESTAC and FESTAC@50."
+          width={2677}
+          height={184}
+          className="mx-auto h-auto w-full max-w-md"
+        />
         <Image
           src="/patterns/communify-logo.png"
           alt="Communify"
