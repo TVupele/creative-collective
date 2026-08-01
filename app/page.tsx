@@ -179,7 +179,7 @@ export default function Home() {
           </p>
 
           <Image
-            src="/patterns/wakanow.png"
+            src="/patterns/wakanow-logo.png"
             alt="Wakanow"
             width={1075}
             height={283}
