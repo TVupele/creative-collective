@@ -175,7 +175,7 @@ export default function Home() {
 
           <p className="mt-8 font-semibold text-parchment">Official Travel Partner.</p>
           <p className="text-sm text-parchment/80">
-            The Africa Heritage Tour is fulfilled by Wakanow.
+            The Africa Heritage Tour is fulfilled by Wakanow and partners.
           </p>
 
           <Image
