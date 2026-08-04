@@ -112,8 +112,8 @@ export default function Home() {
           <Image
             src="/patterns/creative-collective-logo.png"
             alt="Creative Collective Africa"
-            width={2051}
-            height={1385}
+            width={2308}
+            height={2241}
             className="mx-auto h-auto w-72 sm:w-80"
           />
 
