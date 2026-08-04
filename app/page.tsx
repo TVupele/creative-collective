@@ -114,7 +114,7 @@ export default function Home() {
             alt="Creative Collective Africa"
             width={1600}
             height={1400}
-            className="mx-auto h-auto w-72 sm:w-80"
+            className="mx-auto h-auto w-62 sm:w-70"
           />
 
           <p className="mx-auto mt-6 max-w-xl text-ink/80">
