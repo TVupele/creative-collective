@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins, Inter, IBM_Plex_Mono } from "next/font/google";
 import AuthProvider from "@/components/AuthProvider";
+import FloatingShopButton from "@/components/FloatingShopButton";
 import { CartProvider } from "@/lib/cart-context";
 import "./globals.css";
 
@@ -39,12 +40,7 @@ export default function RootLayout({
         <AuthProvider>
           <CartProvider>
             {children}
-            <a
-              href="/shop"
-              className="fixed bottom-4 right-4 z-50 rounded-full bg-amber px-5 py-3 font-mono text-sm font-semibold text-ink shadow-lg transition hover:bg-gold"
-            >
-              Shop
-            </a>
+            <FloatingShopButton />
           </CartProvider>
         </AuthProvider>
       </body>

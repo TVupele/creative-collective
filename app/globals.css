@@ -23,3 +23,50 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .badge-ring { animation: none; }
 }
+
+@layer components {
+  /* Shop building blocks — every interactive surface in the shop is a pill or
+     a soft-cornered card, so the shapes live here rather than being retyped. */
+  .pill {
+    @apply inline-flex items-center justify-center gap-2 rounded-full text-sm font-semibold transition duration-200;
+  }
+  .pill-primary {
+    @apply pill bg-ink px-6 py-3 text-parchment shadow-soft hover:bg-ink/85 active:scale-[0.98];
+  }
+  .pill-accent {
+    @apply pill bg-amber px-6 py-3 text-ink shadow-glow hover:bg-gold active:scale-[0.98];
+  }
+  .pill-ghost {
+    @apply pill border border-ink/10 bg-bone px-6 py-3 text-ink hover:border-ink/25 hover:bg-sand/60 active:scale-[0.98];
+  }
+  .pill-tag {
+    @apply pill bg-ink/[0.06] px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-ink/60;
+  }
+
+  .card-soft {
+    @apply rounded-4xl border border-ink/[0.07] bg-bone shadow-soft;
+  }
+
+  .field-soft {
+    @apply w-full rounded-2xl border border-ink/10 bg-bone px-4 py-3 text-sm text-ink outline-none transition placeholder:text-ink/35 focus:border-amber focus:ring-4 focus:ring-amber/15;
+  }
+
+  /* Horizontal chip rails on mobile shouldn't show a scrollbar. */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

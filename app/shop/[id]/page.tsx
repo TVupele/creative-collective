@@ -1,9 +1,43 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
+import type { Metadata } from "next";
 import { formatNaira } from "@/lib/money";
 import AddToCartButton from "@/components/AddToCartButton";
+import ProductGallery from "@/components/ProductGallery";
+import ProductCard from "@/components/ProductCard";
+import ShopNav from "@/components/ShopNav";
+
+export const dynamic = "force-dynamic";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const product = await prisma.product.findUnique({ where: { id } });
+  if (!product) return { title: "Piece not found — Creative Collective" };
+
+  return {
+    title: `${product.title} — Creative Collective`,
+    description: product.description.slice(0, 160),
+    openGraph: {
+      title: product.title,
+      description: product.description.slice(0, 160),
+      images: product.images[0] ? [product.images[0]] : undefined,
+    },
+  };
+}
+
+function initials(name: string) {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? "")
+    .join("");
+}
 
 export default async function ProductPage({
   params,
@@ -15,49 +49,91 @@ export default async function ProductPage({
 
   if (!product || product.status !== "ACTIVE") notFound();
 
-  return (
-    <main className="min-h-dvh bg-parchment px-6 py-12">
-      <div className="mx-auto max-w-4xl">
-        <Link href="/shop" className="text-xs uppercase tracking-widest text-ink/50 hover:text-ink">
-          &larr; Shop
-        </Link>
+  const related = await prisma.product.findMany({
+    where: { status: "ACTIVE", category: product.category, id: { not: product.id } },
+    orderBy: { createdAt: "desc" },
+    take: 4,
+  });
 
-        <div className="mt-6 grid gap-10 sm:grid-cols-2">
-          <div>
-            <div className="relative aspect-square overflow-hidden rounded-lg bg-white">
-              {product.images[0] ? (
-                <Image
-                  src={product.images[0]}
-                  alt={product.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 100vw, 50vw"
-                  priority
-                />
+  const soldOut = product.stock <= 0;
+  const lowStock = !soldOut && product.stock <= 3;
+  const listedOn = new Date(product.createdAt).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+
+  return (
+    <div className="min-h-dvh bg-parchment font-body text-ink">
+      <ShopNav />
+
+      <main className="mx-auto max-w-6xl px-5 pb-24 pt-6">
+        <nav className="flex items-center gap-2 text-xs text-ink/45" aria-label="Breadcrumb">
+          <Link href="/shop" className="transition hover:text-ink">
+            Shop
+          </Link>
+          <span aria-hidden>/</span>
+          <Link
+            href={`/shop?category=${encodeURIComponent(product.category)}`}
+            className="transition hover:text-ink"
+          >
+            {product.category}
+          </Link>
+          <span aria-hidden>/</span>
+          <span className="truncate text-ink/70">{product.title}</span>
+        </nav>
+
+        <div className="mt-6 grid gap-10 lg:grid-cols-2 lg:gap-14">
+          <ProductGallery images={product.images} title={product.title} />
+
+          <div className="animate-fade-up">
+            <div className="flex flex-wrap items-center gap-2">
+              <Link
+                href={`/shop?category=${encodeURIComponent(product.category)}`}
+                className="pill-tag transition hover:bg-ink/10"
+              >
+                {product.category}
+              </Link>
+              {soldOut ? (
+                <span className="pill bg-ink/[0.06] px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-ink/50">
+                  Sold out
+                </span>
+              ) : lowStock ? (
+                <span className="pill bg-clay/12 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-clay">
+                  Only {product.stock} left
+                </span>
               ) : (
-                <div className="flex h-full items-center justify-center text-ink/30">
-                  No photo
-                </div>
+                <span className="pill bg-sage/12 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-sage">
+                  In stock
+                </span>
               )}
             </div>
-            {product.images.length > 1 && (
-              <div className="mt-3 grid grid-cols-4 gap-2">
-                {product.images.slice(1).map((img) => (
-                  <div key={img} className="relative aspect-square overflow-hidden rounded-md bg-white">
-                    <Image src={img} alt={product.title} fill className="object-cover" />
-                  </div>
-                ))}
+
+            <h1 className="mt-4 font-display text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl">
+              {product.title}
+            </h1>
+
+            <p className="mt-4 font-display text-3xl font-bold text-ink">
+              {formatNaira(product.price)}
+            </p>
+            <p className="mt-1 text-xs text-ink/45">
+              Price in Nigerian Naira &middot; taxes included
+            </p>
+
+            <div className="mt-6 flex items-center gap-3 rounded-4xl border border-ink/[0.07] bg-bone p-3 shadow-soft">
+              <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-amber to-clay font-display text-sm font-bold text-parchment">
+                {initials(product.memberName)}
+              </span>
+              <div className="min-w-0">
+                <p className="truncate text-sm font-semibold text-ink">
+                  {product.memberName}
+                </p>
+                <p className="text-xs text-ink/50">
+                  Collective member &middot; listed {listedOn}
+                </p>
               </div>
-            )}
-          </div>
-
-          <div>
-            <p className="text-xs uppercase tracking-wide text-ink/50">{product.category}</p>
-            <h1 className="mt-1 font-display text-2xl font-bold text-ink">{product.title}</h1>
-            <p className="mt-2 text-lg text-ink/80">{formatNaira(product.price)}</p>
-            <p className="mt-1 text-sm text-ink/60">by {product.memberName}</p>
-
-            <p className="mt-6 whitespace-pre-line text-ink/80">{product.description}</p>
+            </div>
 
             <div className="mt-8">
               <AddToCartButton
@@ -71,12 +147,59 @@ export default async function ProductPage({
               />
             </div>
 
-            {product.stock > 0 && product.stock <= 3 && (
-              <p className="mt-3 text-sm text-clay">Only {product.stock} left.</p>
-            )}
+            <div className="mt-8">
+              <h2 className="text-xs font-bold uppercase tracking-[0.16em] text-ink/45">
+                About this piece
+              </h2>
+              <p className="mt-3 whitespace-pre-line leading-relaxed text-ink/75">
+                {product.description}
+              </p>
+            </div>
+
+            <ul className="mt-8 grid gap-2 sm:grid-cols-3">
+              <Assurance title="Secure payment" body="Cards, transfer & USSD via Paystack" />
+              <Assurance title="Nationwide delivery" body="Arranged after your order is confirmed" />
+              <Assurance title="Direct support" body="Most of every sale reaches the maker" />
+            </ul>
           </div>
         </div>
-      </div>
-    </main>
+
+        {related.length > 0 && (
+          <section className="mt-20">
+            <div className="flex items-end justify-between gap-4">
+              <div>
+                <h2 className="font-display text-2xl font-bold tracking-tight text-ink">
+                  More in {product.category}
+                </h2>
+                <p className="mt-1 text-sm text-ink/55">
+                  Other pieces the collective has listed in this category.
+                </p>
+              </div>
+              <Link
+                href={`/shop?category=${encodeURIComponent(product.category)}`}
+                className="pill-ghost hidden px-5 py-2.5 text-xs sm:inline-flex"
+              >
+                See all
+              </Link>
+            </div>
+
+            <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {related.map((item) => (
+                <ProductCard key={item.id} product={item} />
+              ))}
+            </div>
+          </section>
+        )}
+      </main>
+    </div>
+  );
+}
+
+function Assurance({ title, body }: { title: string; body: string }) {
+  return (
+    <li className="rounded-3xl border border-ink/[0.07] bg-bone/70 px-4 py-3">
+      <p className="text-xs font-bold text-ink">{title}</p>
+      <p className="mt-0.5 text-xs leading-relaxed text-ink/50">{body}</p>
+    </li>
   );
 }

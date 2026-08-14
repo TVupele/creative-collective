@@ -13,6 +13,9 @@ export interface CartItem {
 
 interface CartContextValue {
   items: CartItem[];
+  /** False until the saved cart has been read from localStorage. Views should
+   *  wait for this before deciding the cart is empty. */
+  hydrated: boolean;
   addItem: (item: Omit<CartItem, "quantity">, quantity?: number) => void;
   removeItem: (productId: string) => void;
   setQuantity: (productId: string, quantity: number) => void;
@@ -79,7 +82,16 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <CartContext.Provider
-      value={{ items, addItem, removeItem, setQuantity, clear, totalItems, totalPrice }}
+      value={{
+        items,
+        hydrated,
+        addItem,
+        removeItem,
+        setQuantity,
+        clear,
+        totalItems,
+        totalPrice,
+      }}
     >
       {children}
     </CartContext.Provider>
