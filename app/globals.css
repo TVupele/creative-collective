@@ -51,6 +51,73 @@ body {
     @apply w-full rounded-2xl border border-ink/10 bg-bone px-4 py-3 text-sm text-ink outline-none transition placeholder:text-ink/35 focus:border-amber focus:ring-4 focus:ring-amber/15;
   }
 
+  /* ---- Shop masthead ring ----------------------------------------------
+     Every size below is a share of the ring artwork's own width (cqw), taken
+     by measuring the reference comp (1419px wide). Scaling the container
+     therefore scales the whole lockup together, so the copy can never spill
+     outside the circle and the circle is never clipped by the viewport.
+     The ring band is 0.8647 of the artwork width, so a 112vw container keeps
+     the visible circle at ~97vw — full-bleed but complete. */
+  .ring-frame {
+    container-type: inline-size;
+    width: min(112vw, 48rem);
+  }
+  .ring-copy {
+    width: 72cqw;      /* widest measured body line is 70.2cqw */
+  }
+  .ring-logo {
+    width: 9.65cqw;
+  }
+  .ring-title {
+    font-size: 3.03cqw;
+    line-height: 1.15;
+    margin-top: 1cqw;
+  }
+  .ring-body {
+    font-size: 2.33cqw;
+    line-height: 1.09;
+    margin-top: 2.6cqw;
+  }
+  .ring-list {
+    font-size: 1.9cqw;
+    line-height: 1.12;
+    margin-top: 4.3cqw;
+  }
+
+  /* ---- Collection cards -------------------------------------------------
+     Sized against the card width so all six panels are typographically
+     identical regardless of how long the culture name is. */
+  .collection-card {
+    container-type: inline-size;
+  }
+  /* Sizes below match the comp's cap heights (kicker 1.41cqw, title 2.26cqw
+     at a 0.72em cap ratio), which also lands the longest title — Kanuri — at
+     the comp's 69% ink width. */
+  .collection-kicker {
+    font-size: 1.96cqw;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    padding-bottom: 0.35cqw;
+  }
+  .collection-title {
+    font-size: 3.14cqw;
+    line-height: 1.08;
+    margin-top: 0.35cqw;
+  }
+  .collection-titleblock {
+    padding-left: 1.83cqw;
+    padding-right: 1.83cqw;
+    padding-top: 2.92cqw;
+  }
+  .collection-cta {
+    font-size: 2cqw;
+    padding: 1.7cqw 6cqw;
+  }
+  .collection-footer {
+    padding-top: 3cqw;
+    padding-bottom: 3.6cqw;
+  }
+
   /* Horizontal chip rails on mobile shouldn't show a scrollbar. */
   .no-scrollbar {
     scrollbar-width: none;

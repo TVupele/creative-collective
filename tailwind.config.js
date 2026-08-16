@@ -27,10 +27,11 @@ module.exports = {
         plum: '#6B3F63',
 
         // Shop collective palette, sampled from the collection artwork
-        night: '#2A2350',     // deep indigo behind the triangle ring
-        nightDeep: '#211B41',
+        night: '#252040',     // sampled from the ring artwork background
+        nightDeep: '#1D1934',
         flame: '#F4762B',     // headline orange
         sun: '#FAED00',       // feature-list yellow
+        cream: '#FFF8AF',     // collection card title text
         leaf: '#00A55A',      // collective mark green
         rose: '#EE3D6E',      // ring pink
       },

@@ -3,56 +3,58 @@ import Image from "next/image";
 import type { ShopCollection } from "@/lib/collections";
 
 /**
- * One "explore collection" card. The artwork PNG already carries the photo and
- * the pattern bands; the title lockup is overlaid at the top and the pill sits
- * in the black band the artwork leaves at the bottom.
+ * One collection panel.
+ *
+ * Two things keep the six panels identical:
+ *
+ * 1. The title is live text, not the title PNG. The PNGs have different
+ *    intrinsic widths (607px for Ga vs 964px for Kanuri), so rendering them
+ *    at a common width scaled each culture's name differently.
+ * 2. The artwork is cropped to `contentAspect` — the height at which its last
+ *    colour band ends. The source files carry between 267px and 604px of
+ *    black below that band, which is what made the button sit at a different
+ *    distance on every panel. Cropping it away lets one shared footer set the
+ *    spacing for all six.
  */
 export default function CollectionCard({
   collection,
-  count,
   priority = false,
 }: {
   collection: ShopCollection;
-  count?: number;
   priority?: boolean;
 }) {
   return (
     <Link
       href={`/shop/collection/${collection.slug}`}
       aria-label={`Explore the collection inspired by ${collection.title}`}
-      className="group relative flex flex-col overflow-hidden rounded-4xl bg-black shadow-soft ring-1 ring-white/10 transition duration-300 hover:-translate-y-1 hover:shadow-lift hover:ring-sun/50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sun/60"
+      className="collection-card group block bg-black focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sun/60"
     >
-      <div className="relative">
+      <div
+        className="relative w-full overflow-hidden"
+        style={{ aspectRatio: collection.contentAspect }}
+      >
         <Image
           src={collection.image}
           alt=""
-          width={1446}
-          height={1639}
+          fill
           priority={priority}
-          sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 31vw"
-          className="h-auto w-full transition duration-500 group-hover:scale-[1.02]"
+          sizes="(max-width: 768px) 100vw, 45rem"
+          className="object-cover object-top"
         />
 
-        {/* Title lockup, set over the top of the artwork */}
-        <div className="absolute left-[4%] right-[4%] top-[2.5%]">
-          <Image
-            src={collection.titleImage}
-            alt={`Artistic creations inspired by ${collection.title}`}
-            width={964}
-            height={63}
-            className="h-auto w-[86%] max-w-[22rem]"
-          />
+        <div className="collection-titleblock absolute inset-x-0 top-0">
+          <span className="collection-kicker inline-block border-b border-cream/70 font-display font-bold uppercase text-cream drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+            Artistic creations inspired by:
+          </span>
+          <h3 className="collection-title font-display font-bold uppercase text-cream drop-shadow-[0_2px_3px_rgba(0,0,0,0.55)]">
+            {collection.title}
+          </h3>
         </div>
       </div>
 
-      {/* Pill sits in the black band at the foot of the artwork */}
-      <div className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-2 pb-[6%]">
-        {typeof count === "number" && (
-          <span className="rounded-full bg-white/10 px-3 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-white/70 backdrop-blur">
-            {count} {count === 1 ? "piece" : "pieces"}
-          </span>
-        )}
-        <span className="pill bg-sun px-7 py-2.5 font-mono text-xs lowercase tracking-wide text-ink shadow-glow transition group-hover:bg-amber">
+      {/* Shared footer — identical on every panel */}
+      <div className="collection-footer flex justify-center bg-black">
+        <span className="collection-cta inline-flex items-center justify-center rounded-full bg-sun font-mono lowercase tracking-wide text-ink transition group-hover:bg-amber">
           explore collection
         </span>
       </div>

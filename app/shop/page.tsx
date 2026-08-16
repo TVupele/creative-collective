@@ -18,43 +18,17 @@ export const metadata = {
     "Original work from creatives across Africa and the Diaspora, released drop by drop on the Road to FESTAC@50.",
 };
 
-async function CollectionGrid() {
-  const counts = await prisma.product.groupBy({
-    by: ["collection"],
-    where: { status: "ACTIVE", collection: { not: null } },
-    _count: { _all: true },
-  });
-
-  const countBySlug = new Map(
-    counts.map((row) => [row.collection as string, row._count._all])
-  );
-
+/** The six panels, stacked flush as one continuous list.
+ *  Full-bleed on mobile (the -mx-5 cancels the page gutter) so the artwork
+ *  runs edge to edge exactly as it does in the comp. */
+function CollectionList() {
   return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="-mx-5 bg-black sm:mx-auto sm:w-full sm:max-w-[45rem]">
       {COLLECTIONS.map((collection, index) => (
-        <div
+        <CollectionCard
           key={collection.slug}
-          className="animate-fade-up"
-          style={{ animationDelay: `${Math.min(index, 5) * 70}ms` }}
-        >
-          <CollectionCard
-            collection={collection}
-            count={countBySlug.get(collection.slug) ?? 0}
-            priority={index < 3}
-          />
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function CollectionGridSkeleton() {
-  return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {COLLECTIONS.map((c) => (
-        <div
-          key={c.slug}
-          className="aspect-[1446/1639] animate-pulse rounded-4xl bg-ink/10"
+          collection={collection}
+          priority={index < 2}
         />
       ))}
     </div>
@@ -177,9 +151,7 @@ export default async function ShopPage({
           </div>
 
           <div className="mt-10">
-            <Suspense fallback={<CollectionGridSkeleton />}>
-              <CollectionGrid />
-            </Suspense>
+            <CollectionList />
           </div>
         </section>
 
