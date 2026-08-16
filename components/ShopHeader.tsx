@@ -27,7 +27,9 @@ export default function ShopHeader({
 }) {
   return (
     <section className="relative flex justify-center overflow-hidden bg-night">
-      <div className="ring-frame relative py-6">
+      {/* shrink-0 so the frame keeps its 112vw width instead of being squeezed
+          by the flex row — the ring then fills the viewport as intended. */}
+      <div className="ring-frame relative shrink-0 py-6">
         <Image
           src="/patterns/shop-header-ring.png"
           alt=""
