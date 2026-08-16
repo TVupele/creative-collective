@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 import WaitlistBanner from "@/components/WaitlistBanner";
+import VideoBackdrop from "@/components/VideoBackdrop";
 
 export default function Home() {
   return (
@@ -10,50 +11,37 @@ export default function Home() {
         <WaitlistBanner />
       </Suspense>
 
-      {/* Hero — kente background image with text positioned to match reference exactly */}
-      <section className="relative w-full bg-ink">
-        <Image
-          src="/patterns/kente-hero.jpg"
-          alt="Kente pattern background"
-          width={1535}
-          height={1600}
-          className="h-auto w-full"
-          priority
+      {/* Hero — looping kente video behind the title lockup */}
+      <section className="relative w-full overflow-hidden bg-ink">
+        <VideoBackdrop
+          src="/patterns/replace-kente-background.mp4"
+          poster="/patterns/kente-hero.jpg"
+          overlayClassName="bg-ink/50"
         />
 
-        {/* One Continent. One Diaspora. */}
-        <div className="absolute inset-x-0 top-[21.4%] -translate-y-1/2 px-4 text-center">
-          <h1 className="whitespace-nowrap font-display text-[4.3vw] font-bold text-parchment sm:text-2xl md:text-3xl">
+        <div className="relative mx-auto flex min-h-[38rem] max-w-3xl flex-col items-center justify-center px-6 py-16 text-center sm:min-h-[44rem]">
+          <h1 className="font-display text-2xl font-bold leading-[1.05] text-parchment drop-shadow-lg sm:text-3xl md:text-4xl">
             One Continent. One Diaspora.
           </h1>
-        </div>
 
-        {/* CBAAC seal */}
-        <div className="absolute left-[30.3%] top-[26.75%] w-[39.4%]">
           <Image
             src="/patterns/cbaac-seal.jpg"
             alt="Centre for Black and African Arts and Civilization (CBAAC) seal"
             width={420}
             height={420}
-            className="h-auto w-full rounded-full shadow-2xl"
+            className="mt-6 h-auto w-40 rounded-full shadow-2xl sm:w-52"
             priority
           />
-        </div>
 
-        {/* presents — CBAAC header image, centered in the green band */}
-        <div className="absolute inset-x-0 top-[71.3%] -translate-y-1/2 px-6">
           <Image
             src="/patterns/cbaac-header.png"
             alt="The Centre for Black and African Arts and Civilizations (CBAAC) presents:"
             width={1471}
             height={200}
-            className="mx-auto h-auto w-full max-w-[17rem] sm:max-w-[24rem]"
+            className="mt-6 h-auto w-full max-w-[17rem] sm:max-w-[24rem]"
           />
-        </div>
 
-        {/* Journey heading — centered in the red band */}
-        <div className="absolute inset-x-0 top-[88.5%] -translate-y-1/2 px-6 text-center">
-          <h2 className="font-display text-[4.3vw] font-bold text-parchment drop-shadow-md sm:text-2xl md:text-3xl">
+          <h2 className="mt-4 font-display text-xl font-bold leading-[1.05] text-parchment drop-shadow-lg sm:text-2xl md:text-3xl">
             The Official Continental Journey to FESTAC@50.
           </h2>
         </div>
@@ -106,8 +94,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Creative Collective — orange section with brown bullet band */}
-      <section className="relative bg-saffron px-6 py-20 text-center">
+      {/* Creative Collective — looping video backdrop with the bullet band */}
+      <section className="relative overflow-hidden bg-saffron px-6 py-20 text-center">
+        <VideoBackdrop
+          src="/patterns/change-collectives.mp4"
+          overlayClassName="bg-ink/55"
+        />
+
         <div className="relative mx-auto max-w-2xl">
           <Image
             src="/patterns/creative-collective-logo.png"
@@ -117,13 +110,13 @@ export default function Home() {
             className="mx-auto h-auto w-52 sm:w-60"
           />
 
-          <p className="mx-auto mt-6 max-w-xl text-ink/80">
+          <p className="mx-auto mt-6 max-w-xl text-parchment/90 drop-shadow">
             Join Africa&apos;s largest community of creatives shaping the Road to FESTAC and
             FESTAC@50.
           </p>
         </div>
 
-        <div className="relative -mx-6 mt-6 bg-cocoa px-6 py-4">
+        <div className="relative -mx-6 mt-6 bg-cocoa/90 px-6 py-4 backdrop-blur-sm">
           <ul className="mx-auto max-w-xl space-y-1 text-parchment/95">
             <li>. CREATE: Collaborate with creatives across Africa.</li>
             <li>. PERFORM: Participate in official events.</li>
@@ -133,7 +126,7 @@ export default function Home() {
         </div>
 
         <div className="relative mx-auto max-w-2xl">
-          <p className="mx-auto mt-8 max-w-xl text-ink/80">
+          <p className="mx-auto mt-8 max-w-xl text-parchment/90 drop-shadow">
             Join creatives from across Africa and the Diaspora preparing for FESTAC@50.
           </p>
 

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/require-admin";
 import { nairaToKobo } from "@/lib/money";
+import { COLLECTION_SLUGS } from "@/lib/collections";
 
 export async function GET(
   _req: NextRequest,
@@ -38,6 +39,15 @@ export async function PATCH(
   if (typeof data.priceNaira === "number") {
     updateData.price = nairaToKobo(data.priceNaira);
     delete updateData.priceNaira;
+  }
+
+  if ("collection" in updateData) {
+    const value = updateData.collection;
+    if (!value) {
+      updateData.collection = null; // "General products" — no collection card
+    } else if (typeof value !== "string" || !COLLECTION_SLUGS.includes(value)) {
+      return NextResponse.json({ error: "Unknown collection." }, { status: 400 });
+    }
   }
 
   try {

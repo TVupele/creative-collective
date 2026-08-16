@@ -25,6 +25,14 @@ module.exports = {
         // Supporting status colours, warm enough to live beside amber/clay
         sage: '#3F7A5E',
         plum: '#6B3F63',
+
+        // Shop collective palette, sampled from the collection artwork
+        night: '#2A2350',     // deep indigo behind the triangle ring
+        nightDeep: '#211B41',
+        flame: '#F4762B',     // headline orange
+        sun: '#FAED00',       // feature-list yellow
+        leaf: '#00A55A',      // collective mark green
+        rose: '#EE3D6E',      // ring pink
       },
       fontFamily: {
         display: ['var(--font-display)', 'sans-serif'],

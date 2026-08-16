@@ -1,4 +1,4 @@
-export type Category = "creative" | "alist";
+export type Category = "creative" | "alist" | "partner";
 
 export const DISCIPLINES = [
   "Music",
@@ -19,6 +19,45 @@ export const COLLAB_TYPES = [
   "Mentorship",
   "Brand partnership",
   "Judging / curation",
+  "Other",
+] as const;
+
+/** The creative areas a partner can choose to back. */
+export const PARTNER_FOCUS_AREAS = [
+  "Music",
+  "Visual Art & Sculpture",
+  "Film & TV",
+  "Fashion & Textiles",
+  "Performance & Dance",
+  "Photography",
+  "Literature & Poetry",
+  "Heritage & Cultural Tours",
+  "Festivals & Live Events",
+  "Creative Education & Training",
+  "Across the whole creative industry",
+] as const;
+
+/** How a partner wants to support — not only money. */
+export const PARTNER_SUPPORT_TYPES = [
+  "Funding / sponsorship",
+  "Equipment & materials",
+  "Venue or studio space",
+  "Media & marketing support",
+  "Distribution & retail",
+  "Mentorship & training",
+  "Travel & logistics",
+  "Technology & platforms",
+  "Other",
+] as const;
+
+export const PARTNER_ORG_TYPES = [
+  "Company / brand",
+  "Foundation / NGO",
+  "Government / agency",
+  "Individual philanthropist",
+  "Investor / fund",
+  "Media organisation",
+  "Educational institution",
   "Other",
 ] as const;
 
@@ -51,4 +90,30 @@ export interface AListRegistration extends BaseRegistration {
   collabType: string;
 }
 
-export type Registration = CreativeRegistration | AListRegistration;
+/**
+ * Partners aren't creatives — they're organisations and individuals backing
+ * specific creative projects, so they get their own shape (and their own tab
+ * in the Google Sheet).
+ */
+export interface PartnerRegistration {
+  category: "partner";
+  organisation: string;
+  orgType: string;
+  fullName: string; // contact person
+  role: string;
+  email: string;
+  phone: string;
+  city: string;
+  country: string;
+  website: string;
+  focusAreas: string[];
+  supportTypes: string[];
+  budgetRange: string;
+  projectInterest: string;
+  message: string;
+}
+
+export type Registration =
+  | CreativeRegistration
+  | AListRegistration
+  | PartnerRegistration;

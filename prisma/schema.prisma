@@ -46,6 +46,11 @@ model Product {
   stock       Int           @default(1)
   status      ProductStatus @default(DRAFT)
 
+  // Optional curated collection (Benin, Kanuri, Ga, Masai, Zulu, Armed Forces...).
+  // Stored as the slug from lib/collections.ts. Null means the piece only
+  // appears in the general products section.
+  collection  String?
+
   // The member (artist/creative) this item belongs to. Members are not
   // system users — they submit items via email/WhatsApp, and an admin
   // uploads on their behalf. These fields exist purely for payout tracking.
@@ -61,6 +66,7 @@ model Product {
   orderItems  OrderItem[]
 
   @@index([status, category])
+  @@index([status, collection])
 }
 
 model Order {

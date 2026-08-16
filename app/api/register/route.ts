@@ -18,6 +18,13 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  if (data.category === "partner" && !data.organisation) {
+    return NextResponse.json(
+      { error: "Tell us which organisation you're partnering on behalf of." },
+      { status: 400 }
+    );
+  }
+
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailPattern.test(data.email)) {
     return NextResponse.json({ error: "Enter a valid email address." }, { status: 400 });

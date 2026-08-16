@@ -7,6 +7,7 @@ import AddToCartButton from "@/components/AddToCartButton";
 import ProductGallery from "@/components/ProductGallery";
 import ProductCard from "@/components/ProductCard";
 import ShopNav from "@/components/ShopNav";
+import { getCollection } from "@/lib/collections";
 
 export const dynamic = "force-dynamic";
 
@@ -55,6 +56,7 @@ export default async function ProductPage({
     take: 4,
   });
 
+  const productCollection = getCollection(product.collection);
   const soldOut = product.stock <= 0;
   const lowStock = !soldOut && product.stock <= 3;
   const listedOn = new Date(product.createdAt).toLocaleDateString("en-GB", {
@@ -90,11 +92,19 @@ export default async function ProductPage({
           <div className="animate-fade-up">
             <div className="flex flex-wrap items-center gap-2">
               <Link
-                href={`/shop?category=${encodeURIComponent(product.category)}`}
+                href={`/shop?category=${encodeURIComponent(product.category)}&scope=all#general`}
                 className="pill-tag transition hover:bg-ink/10"
               >
                 {product.category}
               </Link>
+              {productCollection && (
+                <Link
+                  href={`/shop/collection/${productCollection.slug}`}
+                  className="pill bg-amber/20 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-goldDeep transition hover:bg-amber/35"
+                >
+                  {productCollection.name}
+                </Link>
+              )}
               {soldOut ? (
                 <span className="pill bg-ink/[0.06] px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-ink/50">
                   Sold out

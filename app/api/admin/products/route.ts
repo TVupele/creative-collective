@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/require-admin";
 import { nairaToKobo } from "@/lib/money";
+import { COLLECTION_SLUGS } from "@/lib/collections";
 
 export async function GET() {
   const { unauthorized } = await requireAdmin();
@@ -23,6 +24,7 @@ export async function POST(req: NextRequest) {
     priceNaira?: number;
     images?: string[];
     category?: string;
+    collection?: string | null;
     stock?: number;
     memberName?: string;
     memberContact?: string;
@@ -44,6 +46,7 @@ export async function POST(req: NextRequest) {
     priceNaira,
     images,
     category,
+    collection,
     stock,
     memberName,
     memberContact,
@@ -67,6 +70,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Price must be greater than zero." }, { status: 400 });
   }
 
+  if (collection && !COLLECTION_SLUGS.includes(collection)) {
+    return NextResponse.json({ error: "Unknown collection." }, { status: 400 });
+  }
+
   try {
     const product = await prisma.product.create({
       data: {
@@ -75,6 +82,7 @@ export async function POST(req: NextRequest) {
         price: nairaToKobo(priceNaira),
         images: images ?? [],
         category,
+        collection: collection || null,
         stock: stock ?? 1,
         memberName,
         memberContact,
