@@ -6,6 +6,10 @@ import { usePathname } from "next/navigation";
  *  shop itself the header already carries Shop and Cart links. */
 const HIDDEN_ON = ["/shop", "/cart", "/checkout", "/order", "/admin"];
 
+/* Pages can also opt out by rendering an element with `data-hide-shop-button`.
+   The pre-launch page needs this: it's served at "/" via a rewrite, so the
+   pathname alone can't tell it apart from the real homepage. */
+
 export default function FloatingShopButton() {
   const pathname = usePathname();
 
@@ -14,7 +18,7 @@ export default function FloatingShopButton() {
   return (
     <a
       href="/shop"
-      className="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-amber px-6 py-3.5 font-body text-sm font-semibold text-ink shadow-glow transition hover:bg-gold active:scale-95"
+      className="[body:has([data-hide-shop-button])_&]:hidden fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-amber px-6 py-3.5 font-body text-sm font-semibold text-ink shadow-glow transition hover:bg-gold active:scale-95"
     >
       <svg
         viewBox="0 0 24 24"
