@@ -440,8 +440,13 @@
 .festacBanner {
   order: 5;
   min-height: 112.482vh;
-  background-color: #fff;
+  background-color: #000;
   background-image: url("/home/festac-banner.jpg");
+  /* Wix shows its cropped "2f_edited" artwork at full page width, pinned to
+     the top: measured off the live page, the scale stays the same whatever
+     the section height, so this is width-fit rather than cover. */
+  background-size: 100% auto;
+  background-position: center top;
 }
 
 /* ---- 6 · Road to FESTAC story ------------------------------------------- */
@@ -450,6 +455,9 @@
   order: 6;
   background-color: rgb(3, 78, 0);
   background-image: url("/home/bg-festac-texture.jpg");
+  /* Wix focal point is (16%, 49%) of its full-size artwork; this file is the
+     desktop-visible slice of it, so 3% lands on the same patterned edge on phones */
+  background-position: 3% 49%;
 }
 
 .festacStory .inner {
@@ -896,6 +904,7 @@
 
   .festacBanner {
     min-height: calc(0.9334332 * var(--u));
+    background-size: cover;
   }
 
   .festacStory .inner {
