@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Azeret_Mono, Wix_Madefor_Text } from "next/font/google";
+import FocalBackgrounds from "@/components/home/FocalBackgrounds";
 import Marquee from "@/components/home/Marquee";
 import SiteHeader from "@/components/home/SiteHeader";
 import styles from "@/components/home/home.module.css";
@@ -63,6 +64,7 @@ export default function Home() {
   return (
     <div className={`${azeret.variable} ${madefor.variable} ${styles.page}`} data-hide-shop-button>
       <SiteHeader />
+      <FocalBackgrounds />
 
       <main className={styles.sections}>
         {/* 1 · Hero */}
@@ -144,7 +146,11 @@ export default function Home() {
         />
 
         {/* 6 · Road to FESTAC story */}
-        <section className={`${styles.section} ${styles.festacStory}`}>
+        <section
+          className={`${styles.section} ${styles.festacStory}`}
+          data-focal="16 49"
+          data-ratio={1672 / 941}
+        >
           <div className={styles.inner}>
             <div className={`${styles.textCenter} ${styles.festacCopy}`}>
               <p>
@@ -183,7 +189,11 @@ export default function Home() {
         </section>
 
         {/* 7 · Africa Heritage Tour */}
-        <section className={`${styles.section} ${styles.feature} ${styles.heritage}`}>
+        <section
+          className={`${styles.section} ${styles.feature} ${styles.heritage}`}
+          data-focal="50 29"
+          data-ratio={1024 / 1536}
+        >
           <div className={styles.inner}>
             <div className={styles.heritageLogo}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -214,7 +224,11 @@ export default function Home() {
         </section>
 
         {/* 8 · Experience Africa */}
-        <section className={`${styles.section} ${styles.feature} ${styles.experience}`}>
+        <section
+          className={`${styles.section} ${styles.feature} ${styles.experience}`}
+          data-focal="50 0"
+          data-ratio={1024 / 1536}
+        >
           <div className={styles.inner}>
             <div className={`${styles.box} ${styles.featureBox} ${styles.experienceBox}`}>
               <Marquee
@@ -236,7 +250,12 @@ export default function Home() {
         </section>
 
         {/* 9 · Earn */}
-        <section id="earn" className={`${styles.section} ${styles.feature} ${styles.earn}`}>
+        <section
+          id="earn"
+          className={`${styles.section} ${styles.feature} ${styles.earn}`}
+          data-focal="42 43"
+          data-ratio={1024 / 1536}
+        >
           <div className={styles.inner}>
             <div className={`${styles.box} ${styles.featureBox} ${styles.skillsBox}`}>
               <h1 className={`${styles.display} ${styles.featureTitle} ${styles.gold} ${styles.skillsTitle}`}>
@@ -260,7 +279,12 @@ export default function Home() {
         </section>
 
         {/* 10 · Learn */}
-        <section id="learn" className={`${styles.section} ${styles.feature} ${styles.learn}`}>
+        <section
+          id="learn"
+          className={`${styles.section} ${styles.feature} ${styles.learn}`}
+          data-focal="48 31"
+          data-ratio={1024 / 1536}
+        >
           <div className={styles.inner}>
             <div className={`${styles.box} ${styles.featureBox} ${styles.skillsBox}`}>
               <h1 className={`${styles.display} ${styles.featureTitle} ${styles.gold} ${styles.skillsTitle}`}>
@@ -337,11 +361,8 @@ export default function Home() {
             <div className={`${styles.footerCol} ${styles.fContact}`}>
               <p>CONTACT</p>
               <div>
-                <p>
-                  <a href="mailto:info@creativecollective.africa">info@</a>
-                </p>
-                <p>
-                  <a href="mailto:info@creativecollective.africa">creativecollective.africa</a>
+                <p className={styles.email}>
+                  <a href="mailto:info@creativecollective.africa">info@creativecollective.africa</a>
                 </p>
                 <p>
                   <a href="tel:+2349161467262">+234-916-146-7262</a>

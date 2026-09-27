@@ -370,7 +370,11 @@
   justify-self: center;
   width: 100.377%;
   height: auto;
-  aspect-ratio: 25240 / 1386;
+  /* Wix sizes the box, not the artwork: 1 / 0.0533 on desktop,
+     1 / 0.0825 on phones, then fills it (object-fit: cover, centred). */
+  aspect-ratio: 1 / 0.05332270231353413;
+  object-fit: cover;
+  object-position: 50% 50%;
   margin-left: calc(0.0029557 * var(--u));
 }
 
@@ -440,13 +444,12 @@
 .festacBanner {
   order: 5;
   min-height: 112.482vh;
-  background-color: #000;
+  background-color: #fff;
+  /* Wix "2f_edited.png" (3000×1078): 2f.png with the top 315px trimmed,
+     shown with Wix's "fill" — cover, centred. */
   background-image: url("/home/festac-banner.jpg");
-  /* Wix shows its cropped "2f_edited" artwork at full page width, pinned to
-     the top: measured off the live page, the scale stays the same whatever
-     the section height, so this is width-fit rather than cover. */
-  background-size: 100% auto;
-  background-position: center top;
+  background-size: cover;
+  background-position: center;
 }
 
 /* ---- 6 · Road to FESTAC story ------------------------------------------- */
@@ -455,9 +458,9 @@
   order: 6;
   background-color: rgb(3, 78, 0);
   background-image: url("/home/bg-festac-texture.jpg");
-  /* Wix focal point is (16%, 49%) of its full-size artwork; this file is the
-     desktop-visible slice of it, so 3% lands on the same patterned edge on phones */
-  background-position: 3% 49%;
+  /* Full-height artwork; Wix centres its focal point (16%, 49%), which lands
+     the desktop view on rows 210–849 and phones on the left edge. */
+  background-position: 0% 47.5%;
 }
 
 .festacStory .inner {
@@ -646,6 +649,9 @@
 
 .shop {
   order: 12;
+  /* Unlike the 1600px-capped sections, Wix scales Shop and the footer off
+     the full page width. */
+  --u: 100cqw;
 }
 
 .shopInner {
@@ -685,7 +691,6 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   overflow: hidden;
-  aspect-ratio: 1862 / 762;
   border-radius: 11px;
   background: rgb(255, 222, 191);
 }
@@ -695,6 +700,9 @@
 }
 
 .shopCard > img {
+  /* Out of flow so the card takes Wix's row height, not the photo's. */
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -736,6 +744,7 @@
 
 .footer {
   order: 13;
+  --u: 100cqw;
   background-color: rgb(133, 77, 255);
   background-image: url("/home/bg-footer.jpg");
   font-size: clamp(12px, calc(0.0109375 * var(--u)), 14px);
@@ -745,7 +754,7 @@
 .footerGrid {
   display: grid;
   grid-template-columns: 0.197282fr 0.123395fr 0.301948fr 0.167313fr 0.210119fr;
-  grid-template-rows: auto auto;
+  grid-template-rows: minmax(8.86272px, auto) minmax(9.96528px, auto);
   gap: 20px;
   min-height: 95.6172px;
   padding: 3% 1.5%;
@@ -792,6 +801,10 @@
 
 .fContact {
   width: 69.587%;
+}
+
+.email {
+  white-space: nowrap;
 }
 
 .fContact > p:first-child {
@@ -904,7 +917,6 @@
 
   .festacBanner {
     min-height: calc(0.9334332 * var(--u));
-    background-size: cover;
   }
 
   .festacStory .inner {
@@ -946,7 +958,8 @@
 
   .footerGrid {
     grid-template-columns: 1.44505fr 0.910365fr 0.644654fr;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: minmax(23.2248px, auto) minmax(31.8824px, auto) minmax(8.25236px, auto);
+    gap: 35px 20px;
     min-height: 149.438px;
     padding: 4% 1.5% 2%;
   }
@@ -956,7 +969,10 @@
   .fFollow { grid-area: 1 / 3 / 2 / 4; }
   .fContact { grid-area: 2 / 1 / 3 / 2; width: 85.7873%; }
   .fLegal { grid-area: 2 / 2 / 3 / 4; width: 75.5499%; }
-  .copyright { grid-area: 3 / 1 / 4 / 4; }
+  .copyright {
+    grid-area: 3 / 1 / 4 / 4;
+    font-size: clamp(12px, calc(0.0109375 * var(--u)), 14px);
+  }
 
   .fShop > p:first-child,
   .fFollow > p:first-child {
@@ -1006,6 +1022,7 @@
   /* header */
   .header {
     grid-template-rows: minmax(40px, auto) minmax(2.27273px, auto);
+    row-gap: 6px;
     min-height: 0;
   }
 
@@ -1073,6 +1090,7 @@
   }
 
   .flags img {
+    aspect-ratio: 1 / 0.08251186365854056;
     margin-left: calc(0.0029667 * var(--u));
   }
 
@@ -1140,7 +1158,7 @@
   }
 
   /* heritage */
-  .heritage .inner {
+  .feature.heritage .inner {
     grid-template-rows: minmax(calc(2.0667333 * var(--u)), auto);
   }
 
@@ -1229,6 +1247,7 @@
   /* shop */
   .shopInner {
     padding: 1.34328% 3% 3%;
+    row-gap: calc(0.051283 * var(--u));
     grid-template-rows:
       minmax(calc(0.1692316 * var(--u)), auto)
       minmax(calc(1.1382617 * var(--u)), auto);
@@ -1246,7 +1265,6 @@
   }
 
   .shopCard {
-    aspect-ratio: auto;
     min-height: calc(1.1382617 * var(--u));
   }
 
@@ -1266,10 +1284,12 @@
   /* footer */
   .footerGrid {
     grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: none;
+    grid-template-rows:
+      minmax(122.578px, auto) minmax(97.7031px, auto) minmax(120.344px, auto)
+      minmax(98.25px, auto) minmax(155.953px, auto) minmax(30.5312px, auto);
     min-height: 838.913px;
     padding: 6% 3%;
-    gap: 20px;
+    gap: 40px 0;
   }
 
   .fHelp,
