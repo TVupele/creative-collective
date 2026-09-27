@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 };
 
 /**
- * Pre-launch landing page. `next.config.ts` rewrites "/" here, so visitors to
- * creativecollective.africa land on this page while the full homepage
- * (app/page.tsx) stays in the codebase, untouched, for launch day.
+ * Pre-launch landing page, reachable at /coming-soon. To put it back in front
+ * of the homepage, add a `beforeFiles` rewrite of "/" to "/coming-soon" in
+ * `next.config.ts`.
  */
 export default function ComingSoon() {
   return (

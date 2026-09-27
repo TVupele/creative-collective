@@ -7,8 +7,8 @@ import { usePathname } from "next/navigation";
 const HIDDEN_ON = ["/shop", "/cart", "/checkout", "/order", "/admin"];
 
 /* Pages can also opt out by rendering an element with `data-hide-shop-button`.
-   The pre-launch page needs this: it's served at "/" via a rewrite, so the
-   pathname alone can't tell it apart from the real homepage. */
+   The homepage does, since it carries its own "Shop the Collective" section
+   and "[ GET IN TOUCH ]" pill; so does the pre-launch page. */
 
 export default function FloatingShopButton() {
   const pathname = usePathname();
