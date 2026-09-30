@@ -77,7 +77,7 @@ export default async function ProductPage({
           </Link>
           <span aria-hidden>/</span>
           <Link
-            href={`/shop?category=${encodeURIComponent(product.category)}`}
+            href={`/shop/products?category=${encodeURIComponent(product.category)}`}
             className="transition hover:text-ink"
           >
             {product.category}
@@ -92,7 +92,7 @@ export default async function ProductPage({
           <div className="animate-fade-up">
             <div className="flex flex-wrap items-center gap-2">
               <Link
-                href={`/shop?category=${encodeURIComponent(product.category)}&scope=all#general`}
+                href={`/shop/products?category=${encodeURIComponent(product.category)}&scope=all#general`}
                 className="pill-tag transition hover:bg-ink/10"
               >
                 {product.category}
@@ -186,7 +186,7 @@ export default async function ProductPage({
                 </p>
               </div>
               <Link
-                href={`/shop?category=${encodeURIComponent(product.category)}`}
+                href={`/shop/products?category=${encodeURIComponent(product.category)}`}
                 className="pill-ghost hidden px-5 py-2.5 text-xs sm:inline-flex"
               >
                 See all

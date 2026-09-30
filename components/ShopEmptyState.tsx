@@ -5,7 +5,7 @@ export default function ShopEmptyState({
   query,
   category,
   collectionName,
-  clearHref = "/shop",
+  clearHref = "/shop/products",
 }: {
   filtered: boolean;
   query?: string;
@@ -64,7 +64,7 @@ export default function ShopEmptyState({
             Browse everything
           </Link>
         ) : (
-          <Link href="/shop?scope=all#general" className="pill-accent">
+          <Link href="/shop/products?scope=all#general" className="pill-accent">
             See all products
           </Link>
         )}

@@ -1,232 +1,226 @@
-import { Suspense } from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
-import { COLLECTIONS } from "@/lib/collections";
-import CollectionCard from "@/components/CollectionCard";
-import ProductResults, { parseSort, sortProducts } from "@/components/ProductResults";
-import ShopFilters from "@/components/ShopFilters";
-import ShopHeader from "@/components/ShopHeader";
-import ShopNav from "@/components/ShopNav";
-import ShopEmptyState from "@/components/ShopEmptyState";
-import ShopSkeleton from "@/components/ShopSkeleton";
+import { Azeret_Mono, Wix_Madefor_Text } from "next/font/google";
+import FocalBackgrounds from "@/components/home/FocalBackgrounds";
+import Marquee from "@/components/home/Marquee";
+import SiteFooter from "@/components/home/SiteFooter";
+import SiteHeader from "@/components/home/SiteHeader";
+import home from "@/components/home/home.module.css";
+import styles from "@/components/shop/shop.module.css";
 
-export const dynamic = "force-dynamic";
+/* Same type as the homepage: Azeret Mono throughout, Madefor on buttons. */
+const azeret = Azeret_Mono({ subsets: ["latin"], weight: "400", variable: "--font-azeret" });
+const madefor = Wix_Madefor_Text({ subsets: ["latin"], weight: "400", variable: "--font-madefor" });
 
-export const metadata = {
-  title: "Shop — Creative Collective",
+export const metadata: Metadata = {
+  title: "Shop — Creative Collective Africa",
   description:
-    "Original work from creatives across Africa and the Diaspora, released drop by drop on the Road to FESTAC@50.",
+    "Goods and services from diverse people, cultures and causes — a marketplace where every purchase supports creativity, community and meaningful impact.",
 };
 
-/** The six panels, stacked flush as one continuous list.
- *  Full-bleed on mobile (the -mx-5 cancels the page gutter) so the artwork
- *  runs edge to edge exactly as it does in the comp. */
-function CollectionList() {
+const PRODUCTS_URL = "/shop/products";
+const search = (q: string) => `${PRODUCTS_URL}?q=${encodeURIComponent(q)}`;
+
+/*
+ * Gallery lists are in the Wix gallery's own order. Every gallery on the Wix
+ * page runs right-to-left, so on screen they read in reverse, starting from
+ * the right edge.
+ */
+const CATEGORIES = [
+  { slug: "celebrity-merchandise", label: "Celebrity merchandise", q: "Celebrity" },
+  { slug: "fashion-textiles", label: "Fashion & textiles", q: "Fashion" },
+  { slug: "home-living", label: "Home & living", q: "Home" },
+  { slug: "music-creative-gear", label: "Music & creative gear", q: "Music" },
+  { slug: "packaged-food", label: "Packaged food", q: "Food" },
+  { slug: "art-crafts", label: "Art & crafts", q: "Art" },
+  { slug: "books-learning", label: "Books & learning", q: "Books" },
+  { slug: "african-cultures", label: "African cultures", q: "Culture" },
+  { slug: "special-causes", label: "Special causes", q: "Cause" },
+  { slug: "gifts", label: "Gifts", q: "Gift" },
+].map((c) => ({ src: `/shop/icon-${c.slug}.webp`, alt: c.label, href: search(c.q) }));
+
+/* Cultures with their own collection page link there; the rest search. */
+const CULTURES = [
+  { slug: "oromo", label: "Oromo" },
+  { slug: "maasai", label: "Maasai", collection: "masai" },
+  { slug: "yoruba", label: "Yoruba" },
+  { slug: "hausa", label: "Hausa" },
+  { slug: "amhara", label: "Amhara" },
+  { slug: "fulani", label: "Fulani" },
+  { slug: "zulu", label: "Zulu", collection: "zulu" },
+  { slug: "kanuri", label: "Kanuri", collection: "kanuri" },
+  { slug: "tuareg", label: "Tuareg" },
+  { slug: "jamaican", label: "Jamaican" },
+].map((c) => ({
+  src: `/shop/culture-${c.slug}.webp`,
+  alt: c.label,
+  href: c.collection ? `/shop/collection/${c.collection}` : search(c.label),
+}));
+
+const CAUSES = [
+  { slug: "philantropy", label: "Philanthropy" },
+  { slug: "military-merch", label: "Military merch", collection: "military" },
+  { slug: "youth-students", label: "Youth & students" },
+  { slug: "women-girls", label: "Women & girls" },
+  { slug: "the-disabled", label: "The disabled" },
+  { slug: "green-africa", label: "Green Africa" },
+].map((c) => ({
+  src: `/shop/cause-${c.slug}.webp`,
+  alt: c.label,
+  href: c.collection ? `/shop/collection/${c.collection}` : search(c.label),
+}));
+
+const PRODUCTS = [
+  { slug: "kano-leather-tote", label: "Kano leather tote — N85,000", q: "Kano" },
+  { slug: "indigo-scarf", label: "Indigo scarf — N15,000", q: "Indigo" },
+  { slug: "benin-bronze-bracelet", label: "Benin bronze bracelet — N45,000", q: "Benin" },
+  { slug: "ankara-laptop-sleeve", label: "Ankara laptop sleeve — N25,000", q: "Ankara" },
+].map((p) => ({ src: `/shop/product-${p.slug}.webp`, alt: p.label, href: search(p.q) }));
+
+export default function ShopPage() {
   return (
-    <div className="-mx-5 bg-black sm:mx-auto sm:w-full sm:max-w-[45rem]">
-      {COLLECTIONS.map((collection, index) => (
-        <CollectionCard
-          key={collection.slug}
-          collection={collection}
-          priority={index < 2}
-        />
-      ))}
-    </div>
-  );
-}
+    <div className={`${home.page} ${azeret.variable} ${madefor.variable}`}>
+      <SiteHeader />
+      <FocalBackgrounds />
 
-async function GeneralProducts({
-  q,
-  category,
-  view,
-  sort,
-  scope,
-}: {
-  q?: string;
-  category?: string;
-  view: "timeline" | "grid";
-  sort: ReturnType<typeof parseSort>;
-  scope: "general" | "all";
-}) {
-  const [rows, categoryRows] = await Promise.all([
-    prisma.product.findMany({
-      where: {
-        status: "ACTIVE",
-        // "General" hides pieces that already have their own collection card;
-        // "all" is the show-everything view.
-        ...(scope === "general" ? { collection: null } : {}),
-        ...(category ? { category } : {}),
-        ...(q
-          ? {
-              OR: [
-                { title: { contains: q, mode: "insensitive" } },
-                { memberName: { contains: q, mode: "insensitive" } },
-                { description: { contains: q, mode: "insensitive" } },
-                { category: { contains: q, mode: "insensitive" } },
-              ],
-            }
-          : {}),
-      },
-      orderBy: { createdAt: "desc" },
-    }),
-    prisma.product.findMany({
-      where: {
-        status: "ACTIVE",
-        ...(scope === "general" ? { collection: null } : {}),
-      },
-      select: { category: true },
-      distinct: ["category"],
-    }),
-  ]);
-
-  const categories = categoryRows.map((c) => c.category).sort();
-  const products = sortProducts(rows, sort);
-
-  return (
-    <>
-      <ShopFilters categories={categories} />
-
-      {products.length === 0 ? (
-        <ShopEmptyState filtered={Boolean(q || category)} query={q} category={category} />
-      ) : (
-        <ProductResults
-          products={products}
-          view={view}
-          query={q}
-          category={category}
-          clearHref={scope === "all" ? "/shop?scope=all#general" : "/shop#general"}
-        />
-      )}
-    </>
-  );
-}
-
-export default async function ShopPage({
-  searchParams,
-}: {
-  searchParams: Promise<{
-    q?: string;
-    category?: string;
-    view?: string;
-    sort?: string;
-    scope?: string;
-  }>;
-}) {
-  const params = await searchParams;
-  const view = params.view === "grid" ? "grid" : "timeline";
-  const sort = parseSort(params.sort);
-  const scope = params.scope === "all" ? "all" : "general";
-  const creatorShare = 100 - Number(process.env.COMMISSION_PERCENT ?? 30);
-
-  const scopeHref = (next: "general" | "all") => {
-    const qs = new URLSearchParams();
-    if (params.q) qs.set("q", params.q);
-    if (params.category) qs.set("category", params.category);
-    if (params.view) qs.set("view", params.view);
-    if (params.sort) qs.set("sort", params.sort);
-    if (next === "all") qs.set("scope", "all");
-    const s = qs.toString();
-    return `/shop${s ? `?${s}` : ""}#general`;
-  };
-
-  return (
-    <div className="min-h-dvh bg-parchment font-body text-ink">
-      <ShopNav />
-      <ShopHeader creatorSharePercent={creatorShare} />
-
-      <main className="mx-auto max-w-6xl px-5 pb-28">
-        <section className="pt-14 sm:pt-20">
-          <div className="text-center">
-            <span className="pill border border-ink/10 bg-bone px-4 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-ink/60">
-              <span className="h-1.5 w-1.5 rounded-full bg-amber" aria-hidden />
-              Collections
-            </span>
-            <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-              Artistic creations inspired by Africa.
-            </h2>
-            <p className="mx-auto mt-3 max-w-xl text-ink/60">
-              Six curated collections drawn from the cultures of the continent. Open one to
-              see every piece made for it.
+      <main>
+        {/* 1 · Hero */}
+        <section
+          className={`${home.section} ${styles.hero}`}
+          data-focal="57 48"
+          data-ratio={1536 / 1024}
+        >
+          <div className={`${home.inner} ${styles.body} ${styles.heroInner}`}>
+            <div className={styles.logo}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/home/cc-logo-ring.png" alt="Creative Collective Africa" />
+            </div>
+            <h3 className={styles.kicker}>SHOP THE&nbsp;COLLECTIVE</h3>
+            <h1 className={`${home.display} ${styles.title}`}>
+              PEOPLE |&nbsp;CULTURES |&nbsp;CAUSES
+            </h1>
+            <p className={styles.lead}>
+              The Creative Collective Shop brings together goods and services from diverse people,
+              cultures and causes, creating a marketplace where every purchase supports creativity,
+              community and meaningful impact.
             </p>
-          </div>
-
-          <div className="mt-10">
-            <CollectionList />
+            <Link href={PRODUCTS_URL} className={`${home.btn} ${home.btnGold} ${styles.heroShop}`}>
+              Shop The Collective
+            </Link>
+            <Link href="/join" className={`${home.btn} ${home.btnGold} ${styles.heroCreate}`}>
+              Become A Creator
+            </Link>
+            <form action={PRODUCTS_URL} role="search" className={styles.search}>
+              <input type="search" name="q" placeholder="SEARCH" aria-label="Search the shop" />
+            </form>
           </div>
         </section>
 
-        <section id="general" className="scroll-mt-24 pt-20 sm:pt-24">
-          <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <h2 className="font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-                {scope === "all" ? "All products" : "General products"}
-              </h2>
-              <p className="mt-2 max-w-xl text-ink/60">
-                {scope === "all"
-                  ? "Everything the collective has listed, including every piece inside the six collections."
-                  : "Work listed outside the six collections, newest drops first."}
-              </p>
-            </div>
-
-            <div className="flex flex-shrink-0 items-center gap-1 rounded-full border border-ink/10 bg-bone p-1 shadow-soft">
-              <Link
-                href={scopeHref("general")}
-                aria-current={scope === "general" ? "true" : undefined}
-                className={`pill px-4 py-2 text-xs ${
-                  scope === "general"
-                    ? "bg-ink text-parchment shadow-soft"
-                    : "text-ink/55 hover:text-ink"
-                }`}
-              >
-                General only
-              </Link>
-              <Link
-                href={scopeHref("all")}
-                aria-current={scope === "all" ? "true" : undefined}
-                className={`pill px-4 py-2 text-xs ${
-                  scope === "all"
-                    ? "bg-ink text-parchment shadow-soft"
-                    : "text-ink/55 hover:text-ink"
-                }`}
-              >
-                Show all products
-              </Link>
-            </div>
+        {/* 2 · Category icons */}
+        <section className={`${home.section} ${styles.icons}`}>
+          <div className={`${home.inner} ${styles.body} ${styles.iconsInner}`}>
+            <Marquee
+              items={CATEGORIES}
+              ratio={161 / 213}
+              gap={25}
+              copies={1}
+              height={213}
+              rtl
+              className={styles.iconsGallery}
+            />
+            <hr className={styles.rule} />
           </div>
+        </section>
 
-          <div className="mt-8">
-            <Suspense
-              key={`${params.q ?? ""}|${params.category ?? ""}|${view}|${sort}|${scope}`}
-              fallback={<ShopSkeleton />}
-            >
-              <GeneralProducts
-                q={params.q}
-                category={params.category}
-                view={view}
-                sort={sort}
-                scope={scope}
+        {/* 3 · Shop by culture */}
+        <section
+          className={`${home.section} ${styles.cultures}`}
+          data-focal="23 53"
+          data-ratio={1672 / 940}
+        >
+          <div className={`${home.inner} ${styles.body} ${styles.culturesInner}`}>
+            <div className={`${home.box} ${styles.panel}`}>
+              <h2 className={`${styles.heading} ${styles.cultureTitle}`}>SHOP BY CULTURE</h2>
+              <Marquee
+                items={CULTURES}
+                ratio={207 / 83}
+                gap={25}
+                copies={1}
+                height={83}
+                rtl
+                className={styles.pillsGallery}
               />
-            </Suspense>
+              <h3 className={styles.cultureLead}>
+                EXPLORE PRODUCTS FROM CULTURES ACROSS AFRICA, THE CARIBBEAN AND THE AFRICAN DIASPORA
+              </h3>
+            </div>
+            <Link
+              href="/shop/collection/kanuri"
+              className={`${home.btn} ${home.btnGold} ${styles.culturesBtn}`}
+            >
+              Shop Cultures
+            </Link>
           </div>
         </section>
-      </main>
 
-      <footer className="border-t border-ink/[0.06] bg-bone/60">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-10 text-center sm:flex-row sm:text-left">
-          <p className="text-sm text-ink/50">
-            Creative Collective — the official creative industries platform for the Road to
-            FESTAC and FESTAC@50.
-          </p>
-          <div className="flex gap-3">
-            <Link href="/" className="pill-ghost px-5 py-2.5 text-xs">
-              Back home
-            </Link>
-            <Link href="/join" className="pill-accent px-5 py-2.5 text-xs">
-              Join the collective
+        {/* 4 · Collections for causes */}
+        <section
+          className={`${home.section} ${styles.causes}`}
+          data-focal="44 49"
+          data-ratio={1672 / 941}
+        >
+          <div className={`${home.inner} ${styles.body} ${styles.causesInner}`}>
+            <div className={`${home.box} ${styles.panel} ${styles.causesPanel}`}>
+              <h2 className={`${styles.heading} ${styles.causesTitle}`}>COLLECTIONS FOR CAUSES</h2>
+              <h3 className={styles.causesLead}>
+                SUPPORT THE PEOPLE, IDEAS, AND COMMUNITIES, THAT MAKE AFRICA STRONGER
+              </h3>
+            </div>
+            <Marquee
+              items={CAUSES}
+              ratio={207 / 83}
+              gap={25}
+              copies={2}
+              height={83}
+              rtl
+              className={styles.causesGallery}
+            />
+            <Link
+              href="/shop/collection/military"
+              className={`${home.btn} ${home.btnWhite} ${styles.causesBtn}`}
+            >
+              Explore Causes
             </Link>
           </div>
-        </div>
-      </footer>
+        </section>
+
+        {/* 5 · Featured products */}
+        <section className={`${home.section} ${styles.featured}`}>
+          <div className={`${home.inner} ${styles.body} ${styles.featuredInner}`}>
+            <h3 className={styles.featuredTitle}>FEATURED PRODUCTS</h3>
+            <Marquee
+              items={PRODUCTS}
+              ratio={290 / 531}
+              gap={25}
+              copies={2}
+              height={531}
+              rtl
+              className={styles.productsGallery}
+            />
+            <Link
+              href={PRODUCTS_URL}
+              className={`${home.btn} ${home.btnWhite} ${styles.productsBtn}`}
+            >
+              Shop All Products
+            </Link>
+            <Link href="/join" className={`${home.btn} ${home.btnWhite} ${styles.featuredCreate}`}>
+              Become A Creator
+            </Link>
+          </div>
+        </section>
+
+        <SiteFooter tight />
+      </main>
     </div>
   );
 }

@@ -201,7 +201,7 @@ export default async function CollectionPage({
               </Link>
             ))}
             <Link
-              href="/shop?scope=all#general"
+              href="/shop/products?scope=all#general"
               className="pill flex-shrink-0 bg-ink px-5 py-2.5 text-xs text-parchment shadow-soft"
             >
               All products

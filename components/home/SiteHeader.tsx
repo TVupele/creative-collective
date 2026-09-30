@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useCart } from "@/lib/cart-context";
 import styles from "./home.module.css";
@@ -22,6 +23,9 @@ export default function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { totalItems: count } = useCart();
+  const pathname = usePathname();
+  const isCurrent = (href: string) =>
+    href === "/" ? pathname === "/" : !href.includes("#") && pathname.startsWith(href);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 0);
@@ -51,8 +55,8 @@ export default function SiteHeader() {
               <li key={item.label}>
                 <Link
                   href={item.href}
-                  className={item.href === "/" ? styles.menuCurrent : undefined}
-                  aria-current={item.href === "/" ? "page" : undefined}
+                  className={isCurrent(item.href) ? styles.menuCurrent : undefined}
+                  aria-current={isCurrent(item.href) ? "page" : undefined}
                 >
                   {item.label}
                 </Link>
