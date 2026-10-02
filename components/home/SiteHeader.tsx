@@ -9,7 +9,7 @@ import styles from "./home.module.css";
 export const NAV = [
   { label: "HOME", href: "/" },
   { label: "SHOP", href: "/shop" },
-  { label: "LEARN", href: "/#learn" },
+  { label: "LEARN", href: "/learn" },
   { label: "EARN", href: "/#earn" },
   { label: "HELP", href: "/#help" },
 ];

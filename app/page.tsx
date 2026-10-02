@@ -226,6 +226,7 @@ export default function Home() {
 
         {/* 8 · Experience Africa */}
         <section
+          id="experience"
           className={`${styles.section} ${styles.feature} ${styles.experience}`}
           data-focal="50 0"
           data-ratio={1024 / 1536}
@@ -300,7 +301,7 @@ export default function Home() {
                 className={styles.learnGallery}
               />
             </div>
-            <Link href="/join" className={`${styles.btn} ${styles.btnGold} ${styles.featureBtn}`}>
+            <Link href="/learn" className={`${styles.btn} ${styles.btnGold} ${styles.featureBtn}`}>
               Explore Classes
             </Link>
           </div>
