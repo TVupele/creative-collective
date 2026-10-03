@@ -13,9 +13,9 @@ const azeret = Azeret_Mono({ subsets: ["latin"], weight: "400", variable: "--fon
 const madefor = Wix_Madefor_Text({ subsets: ["latin"], weight: "400", variable: "--font-madefor" });
 
 export const metadata: Metadata = {
-  title: "Learn — Arts & Culture School of Africa | Creative Collective",
+  title: "Learn — Arts & Culture School Africa | Creative Collective",
   description:
-    "School of Excellence: Arts & Culture — world-class learning, real-world experience and industry access for Africa’s next generation of creative leaders.",
+    "Arts & Culture School Africa — world-class learning, real-world experience and industry access for Africa’s next generation of creative leaders.",
 };
 
 /*
@@ -95,7 +95,7 @@ export default function LearnPage() {
           <div className={`${home.inner} ${styles.body} ${styles.heroInner}`}>
             <h1 className={styles.logo}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/learn/logo-acsa.webp" alt="ACSA — Arts & Culture School of Africa" />
+              <img src="/learn/logo-acsa-hero.webp" alt="ACSA — Arts & Culture School Africa" />
             </h1>
             <div className={`${home.box} ${styles.panel} ${styles.heroPanel}`}>
               <div className={`${styles.copy} ${styles.heroCopy}`}>
@@ -103,7 +103,7 @@ export default function LearnPage() {
                   WORLD-CLASS LEARNING. REAL-WORLD EXPERIENCE. INDUSTRY ACCESS.
                 </p>
                 <p>
-                  School of Excellence: Arts &amp; Culture is the learning platform of Creative
+                  The Arts &amp; Culture School Africa is the learning platform of Creative
                   Collective, equipping Africa’s next generation of creative leaders with the
                   knowledge, skills, experience and industry connections to build meaningful careers
                   and shape the future of Africa’s creative economy.
@@ -128,13 +128,13 @@ export default function LearnPage() {
         <section className={`${home.section} ${styles.intro}`}>
           <div className={`${home.inner} ${styles.body} ${styles.introInner}`}>
             <h2 className={`${styles.heading} ${styles.yellow} ${styles.introTitle}`}>
-              MORE THAN COURSES
+              MORE THAN COURSES,
               <br />A CREATIVE JOURNEY
             </h2>
             <h3 className={`${styles.white} ${styles.introLead}`}>
               FROM MASTERCLASSES TO IMMERSIVE FIELD EXPERIENCES AND CREATIVE BUSINESS TRAINING, THE
-              SCHOOL OF EXCELLENCE: ARTS &amp; CULTURE IS DESIGNED TO BUILD SKILLS, OPEN DOORS AND
-              CONNECT YOU TO REAL OPPORTUNITIES.
+              ARTS &amp; CULTURE SCHOOL AFRICA IS DESIGNED TO BUILD SKILLS, OPEN DOORS AND CONNECT
+              YOU TO REAL OPPORTUNITIES.
             </h3>
           </div>
         </section>

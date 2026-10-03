@@ -76,9 +76,9 @@
 }
 
 .body > .logo {
-  width: 39.8383%;
-  aspect-ratio: 3830 / 1284;
-  margin: calc(0.1502767 * var(--u)) 0 0 calc(0.0311957 * var(--u));
+  width: 42.553%;
+  aspect-ratio: 4121 / 1284;
+  margin: calc(0.1418178 * var(--u)) 0 0 calc(0.0068676 * var(--u));
 }
 
 .logo img,
@@ -169,7 +169,7 @@
 /* ---- 4 · Featured instructors & faculty --------------------------------- */
 
 .instructors {
-  order: 4;
+  order: 7;
   background-image: url("/learn/bg-instructors.jpg");
   background-position: 46% 72%;
 }
@@ -235,7 +235,7 @@
 /* ---- 5 · Choose your path ----------------------------------------------- */
 
 .choose {
-  order: 5;
+  order: 4;
   background: #f8dc4c;
 }
 
@@ -256,7 +256,7 @@
 /* ---- 6 · Learning paths ------------------------------------------------- */
 
 .paths {
-  order: 6;
+  order: 5;
   background: #043876;
 }
 
@@ -274,7 +274,7 @@
 /* ---- 7 · Field experiences ---------------------------------------------- */
 
 .field {
-  order: 7;
+  order: 6;
   background-image: url("/learn/bg-field.jpg");
   background-position: 52% 42%;
 }
@@ -330,8 +330,10 @@
 .body > .journeyLogo {
   justify-self: center;
   width: 38.3751%;
-  aspect-ratio: 3830 / 1284;
-  margin: calc(0.1296937 * var(--u)) 0 0 calc(0.0003953 * var(--u));
+  /* Wix kept the box at the previous logo's proportions, so the new artwork
+     is cropped slightly at the sides (object-fit: cover). */
+  aspect-ratio: 1 / 0.3352448;
+  margin: calc(0.1296937 * var(--u)) calc(0.0000098 * var(--u)) 0 0;
 }
 
 .body > .journeyLead {
@@ -356,7 +358,7 @@
 /* ======================================================================= */
 
 @media (max-width: 1000px) {
-  /* Wix moves "Choose your path" up above the programme cards on tablet. */
+  /* Wix's tablet layout has its own section order. */
   .choose {
     order: 3;
   }
@@ -367,6 +369,14 @@
 
   .instructors {
     order: 5;
+  }
+
+  .paths {
+    order: 6;
+  }
+
+  .field {
+    order: 7;
   }
 
   .heroPanel > .heroCopy,
@@ -405,7 +415,7 @@
   }
 
   .choose {
-    order: 5;
+    order: 4;
   }
 
   .programmes {
@@ -413,7 +423,15 @@
   }
 
   .instructors {
-    order: 4;
+    order: 7;
+  }
+
+  .paths {
+    order: 5;
+  }
+
+  .field {
+    order: 6;
   }
 
   /* Hero */
@@ -423,24 +441,26 @@
 
   .body > .logo {
     justify-self: center;
-    width: 94.7628%;
-    margin: calc(0.3351333 * var(--u)) 0 0 calc(0.0076333 * var(--u));
+    width: 100.333%;
+    margin: calc(0.3361333 * var(--u)) calc(0.003529 * var(--u)) 0 0;
   }
 
   .body > .heroPanel {
-    margin: calc(0.9758333 * var(--u)) calc(-0.0024667 * var(--u)) 0 0;
+    width: 102.462%;
+    margin: calc(0.9789333 * var(--u)) calc(-0.0208333 * var(--u)) 0 0;
     grid-template-rows: minmax(calc(0.4902 * var(--u)), auto);
   }
 
   .heroPanel > .heroCopy {
     justify-self: center;
     align-self: end;
-    width: 89.5387%;
-    margin: 0 calc(0.0421 * var(--u)) calc(0.0174347 * var(--u)) 0;
+    width: 87.4687%;
+    margin: 0 calc(0.0420987 * var(--u)) calc(0.0174347 * var(--u)) 0;
+    min-height: 182.342px;
   }
 
   .body > .explore {
-    margin: calc(1.5070667 * var(--u)) 0 0 calc(0.03935 * var(--u));
+    margin: calc(1.4836333 * var(--u)) 0 0 calc(0.0393667 * var(--u));
   }
 
   .body > .features {
@@ -450,7 +470,8 @@
 
   .body > .heroRule {
     align-self: center;
-    margin: calc(0.0064333 * var(--u)) calc(-0.0082667 * var(--u)) 0 0;
+    width: 105.204%;
+    margin: calc(0.0064667 * var(--u)) calc(-0.0082667 * var(--u)) 0 0;
   }
 
   /* More than courses */
@@ -486,7 +507,7 @@
 
   /* Instructors & faculty */
   .instructors .instructorsInner {
-    grid-template-rows: minmax(calc(4.5352267 * var(--u)), auto);
+    grid-template-rows: minmax(calc(4.5320267 * var(--u)), auto);
   }
 
   .body > .instructorsKicker {
@@ -497,7 +518,7 @@
 
   .body > .instructorsTitle {
     width: 64.3911%;
-    margin: calc(0.0945 * var(--u)) 0 0 calc(0.0256 * var(--u));
+    margin: calc(0.0945013 * var(--u)) 0 0 calc(0.0256 * var(--u));
   }
 
   .body > .circlesGallery {
@@ -532,6 +553,7 @@
   .faculty > .bio {
     justify-self: center;
     width: 89.5387%;
+    min-height: 182.342px;
     margin: calc(0.7045333 * var(--u)) calc(0.0091333 * var(--u)) 0 0;
     text-align: center;
   }
