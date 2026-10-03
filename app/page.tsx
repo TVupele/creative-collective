@@ -274,7 +274,7 @@ export default function Home() {
                 className={styles.earnGallery}
               />
             </div>
-            <Link href="/join" className={`${styles.btn} ${styles.btnGold} ${styles.featureBtn}`}>
+            <Link href="/earn" className={`${styles.btn} ${styles.btnGold} ${styles.featureBtn}`}>
               Explore Opportunities
             </Link>
           </div>

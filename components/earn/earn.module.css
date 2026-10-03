@@ -1,0 +1,686 @@
+/*
+ * Earn — a 1:1 rebuild of the Creative Collective Wix Studio earn page. It
+ * reuses the homepage's building blocks (the `--u` scaling unit, single-cell
+ * section grids, buttons and galleries from home.module.css); each
+ * `calc(k * var(--u))` below is Wix's `k * SF`, copied from the Wix stylesheet.
+ *
+ * Breakpoints mirror Wix's: desktop, ≤1000px (tablet) and ≤750px (mobile).
+ */
+
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
+.body {
+  font-size: 16px;
+  line-height: 1.3em;
+}
+
+.body > *,
+.body .panel > * {
+  justify-self: start;
+  align-self: start;
+}
+
+.body h3,
+.body p {
+  font-size: inherit;
+}
+
+/* Wix headlines: Impact at font_0's 1.2em line height, scaled with SF. */
+.impact {
+  font-family: Impact, var(--font-anton), "Anton", sans-serif;
+  line-height: 1.2em;
+  color: #fff;
+}
+
+.big {
+  font-size: calc(0.0578125 * var(--u));
+}
+
+/* Wix font_3 text set at 16px (line-height 1.3em). */
+.lead {
+  line-height: 1.3em;
+}
+
+/* Wix font_8 paragraphs (line-height 1.6em). */
+.copy {
+  line-height: 1.6em;
+}
+
+.yellow {
+  color: #f8dc4c;
+}
+
+.grey {
+  color: rgb(143, 143, 143);
+}
+
+.black {
+  color: #000;
+}
+
+.btnGhost {
+  background: transparent;
+  border-color: #fff;
+  color: #fff;
+}
+
+/* ---- 1 · Hero ----------------------------------------------------------- */
+
+.hero {
+  order: 1;
+  background-image: url("/earn/hero.jpg");
+  background-position: 34% 17%;
+}
+
+.hero .heroInner {
+  grid-template-rows: minmax(calc(0.4533107 * var(--u)), auto);
+}
+
+.body > .headline {
+  width: 38.5604%;
+  aspect-ratio: 1 / 0.537295;
+  margin: calc(0.1017292 * var(--u)) 0 0 calc(0.0232708 * var(--u));
+}
+
+.headline img,
+.acsaLogo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.body > .heroPanel {
+  width: 100.095%;
+  margin: calc(0.3088636 * var(--u)) 0 0 calc(-0.0011462 * var(--u));
+  grid-template-rows: minmax(calc(0.1142292 * var(--u)), auto);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.heroPanel > .heroRule {
+  width: 102.173%;
+  height: 0;
+  margin: calc(0.0049704 * var(--u)) 0 0 calc(-0.0118972 * var(--u));
+  border: 0;
+  border-top: 3px solid #fff;
+}
+
+.heroPanel > .heroCopy {
+  width: 51.0713%;
+  margin: calc(0.0123617 * var(--u)) 0 0 calc(0.0306719 * var(--u));
+  color: #dbdbdb;
+}
+
+.heroPanel > .heroJoin {
+  margin: calc(0.0688142 * var(--u)) 0 0 calc(0.0306719 * var(--u));
+}
+
+.heroPanel > .heroExplore {
+  margin: calc(0.0688044 * var(--u)) 0 0 calc(0.1608844 * var(--u));
+}
+
+/* ---- 2 · 6 ways to earn -------------------------------------------------- */
+
+.band {
+  order: 2;
+  background-color: rgb(143, 143, 143);
+}
+
+.band .bandInner {
+  grid-template-rows: minmax(calc(0.0609684 * var(--u)), auto);
+}
+
+.body > .bandTitle {
+  width: 59.5371%;
+  margin: calc(0.0053162 * var(--u)) 0 0 calc(0.0295352 * var(--u));
+  font-size: calc(0.0395257 * var(--u));
+}
+
+/* ---- 3 · The six cards (full-bleed 3 × 2 grid) --------------------------- */
+
+/* A full-bleed Wix section: its scaling unit isn't capped at 1600px. */
+.cards {
+  --u: 100cqw;
+  order: 3;
+  background-image: url("/earn/cards-bg.jpg");
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows:
+    minmax(calc(0.3280933 * var(--u)), auto)
+    minmax(calc(0.3375597 * var(--u)), auto);
+}
+
+.cell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.card {
+  place-self: center;
+  width: 73.5103%;
+  height: auto;
+  aspect-ratio: 1 / 1.185766;
+  object-fit: cover;
+}
+
+.card4 {
+  margin-left: calc(0.0003854 * var(--u));
+}
+
+.card6 {
+  margin-left: calc(0.0007807 * var(--u));
+}
+
+/* ---- 4 · White rule ------------------------------------------------------ */
+
+.separator {
+  order: 4;
+  background-color: #fff;
+}
+
+.separator .separatorInner {
+  grid-template-rows: minmax(calc(0.0079051 * var(--u)), auto);
+}
+
+/* ---- 5 · From talent to revenue ----------------------------------------- */
+
+.talent {
+  order: 5;
+  background-image: url("/earn/talent.jpg");
+}
+
+.talent .talentInner {
+  grid-template-rows: minmax(calc(0.3155241 * var(--u)), auto);
+}
+
+.body > .talentTitle {
+  width: 87.0822%;
+  margin: calc(0.0561561 * var(--u)) 0 0 calc(0.015 * var(--u));
+}
+
+.body > .revenueTitle {
+  width: 87.0822%;
+  margin: calc(0.1162154 * var(--u)) 0 0 calc(0.015 * var(--u));
+}
+
+.body > .talentLead {
+  width: 38.4992%;
+  margin: calc(0.2133597 * var(--u)) 0 0 calc(0.015 * var(--u));
+  color: #fff;
+}
+
+/* ---- 6 · Icon strip ------------------------------------------------------ */
+
+.icons {
+  order: 6;
+  background-color: rgb(143, 143, 143);
+}
+
+.icons .iconsInner {
+  grid-template-rows: minmax(calc(0.229249 * var(--u)), auto);
+}
+
+.body > .iconsGallery {
+  --h: 271px;
+  align-self: center;
+  width: 100%;
+  margin: 0 0 0 -0.019766%;
+}
+
+/* ---- 7 · Arts & Culture School Africa ----------------------------------- */
+
+.acsa {
+  order: 7;
+  background-image: url("/earn/acsa-bg.jpg");
+  background-position: 2% 89%;
+}
+
+.acsa .acsaInner {
+  grid-template-rows: minmax(calc(0.5060379 * var(--u)), auto);
+}
+
+.body > .acsaKicker {
+  width: 21.6576%;
+  margin: calc(0.0287352 * var(--u)) 0 0 calc(0.0461265 * var(--u));
+  color: #fff;
+}
+
+.body > .acsaLogo {
+  width: 45.3663%;
+  aspect-ratio: 1 / 0.3349858;
+  margin: calc(0.0616206 * var(--u)) 0 0 calc(0.0224111 * var(--u));
+}
+
+.body > .acsaLead {
+  width: 44.1117%;
+  margin: calc(0.2213933 * var(--u)) 0 0 calc(0.0461265 * var(--u));
+}
+
+.body > .acsaBox {
+  width: 100.481%;
+  min-height: calc(0.1559684 * var(--u));
+  margin: calc(0.2754842 * var(--u)) 0 0 calc(-0.0003953 * var(--u));
+  border: max(0.5px, calc(0.000781 * var(--u))) solid #000;
+  background: rgba(0, 0, 0, 0.38);
+}
+
+/* Wix rich-text list: 0.5em indent on the list, 1.3em on each item. */
+.body > .courses {
+  width: 34.7822%;
+  margin: calc(0.278419 * var(--u)) 0 0 calc(0.0461265 * var(--u));
+  padding: 0;
+  margin-inline-start: calc(calc(0.0461265 * var(--u)) + 0.5em);
+  list-style: disc;
+  line-height: normal;
+  color: #fff;
+}
+
+.courses li {
+  margin-inline-start: 1.3em;
+}
+
+.body > .acsaBtn {
+  margin: calc(0.4396344 * var(--u)) 0 0 calc(0.0461265 * var(--u));
+}
+
+/* ---- 8 · Shop African creativity ---------------------------------------- */
+
+.shop {
+  order: 8;
+  background-color: #fff;
+}
+
+.shop .shopInner {
+  grid-template-rows: minmax(calc(0.2152474 * var(--u)), auto);
+}
+
+.body > .shopTitle {
+  width: 87.0822%;
+  margin: calc(0.0561565 * var(--u)) 0 0 calc(0.015 * var(--u));
+}
+
+.body > .shopLead {
+  width: 59.6082%;
+  margin: calc(0.1255336 * var(--u)) 0 0 calc(0.015 * var(--u));
+}
+
+.body > .shopBtn {
+  margin: calc(0.1683794 * var(--u)) 0 0 calc(0.0461265 * var(--u));
+}
+
+/* ---- 9 · Fashion photograph ---------------------------------------------- */
+
+.fashion {
+  order: 9;
+  background-image: url("/earn/fashion.jpg");
+}
+
+.fashion .fashionInner {
+  grid-template-rows: minmax(calc(0.9463549 * var(--u)), auto);
+}
+
+/* ---- 10 · Opportunities -------------------------------------------------- */
+
+.opps {
+  order: 10;
+  background-color: #000;
+}
+
+.opps .oppsInner {
+  grid-template-rows: minmax(calc(0.5954838 * var(--u)), auto);
+}
+
+.body > .oppsTitle {
+  width: 56.3261%;
+  margin: calc(0.0561561 * var(--u)) 0 0 calc(0.015 * var(--u));
+}
+
+.body > .oppsLead {
+  width: 50.1206%;
+  margin: calc(0.206166 * var(--u)) 0 0 calc(0.015 * var(--u));
+  color: #fff;
+}
+
+.body > .mapsGallery {
+  --h: 318px;
+  width: 100%;
+  margin: 24.3102% 0 0 -0.019766%;
+}
+
+.body > .oppsBtn {
+  margin: calc(0.5146048 * var(--u)) 0 0 calc(0.0469269 * var(--u));
+}
+
+/* ---- 11 · Ready ---------------------------------------------------------- */
+
+.ready {
+  order: 11;
+  background-color: #fff;
+  background-image: url("/earn/ready.jpg");
+}
+
+.ready .readyInner {
+  grid-template-rows: minmax(calc(0.3209289 * var(--u)), auto);
+}
+
+.body > .readyTitle {
+  width: 89.4529%;
+  margin: calc(0.0561557 * var(--u)) 0 0 calc(0.015 * var(--u));
+}
+
+.body > .readyLead {
+  width: 52.1397%;
+  margin: calc(0.206166 * var(--u)) 0 0 calc(0.015 * var(--u));
+}
+
+.body > .readyJoin {
+  margin: calc(0.2548617 * var(--u)) 0 0 calc(0.015 * var(--u));
+}
+
+.body > .readyExplore {
+  margin: calc(0.2548617 * var(--u)) 0 0 calc(0.1399012 * var(--u));
+}
+
+/* ======================================================================= */
+/* ≤1000px — Wix tablet breakpoint                                          */
+/* ======================================================================= */
+
+@media (max-width: 1000px) {
+  /* Wix's tablet layout has its own section order. */
+  .shop {
+    order: 6;
+  }
+
+  .opps {
+    order: 7;
+  }
+
+  .ready {
+    order: 8;
+  }
+
+  .icons {
+    order: 9;
+  }
+
+  .acsa {
+    order: 10;
+  }
+
+  .fashion {
+    order: 11;
+  }
+
+  .heroPanel > .heroCopy,
+  .body > .talentLead,
+  .body > .acsaKicker,
+  .body > .acsaLead,
+  .body > .courses,
+  .body > .shopLead,
+  .body > .oppsLead,
+  .body > .readyLead {
+    width: 84.7449%;
+  }
+
+  .body > .iconsGallery,
+  .body > .mapsGallery {
+    --h: 218.4px;
+  }
+}
+
+/* ======================================================================= */
+/* ≤750px — Wix mobile breakpoint                                           */
+/* ======================================================================= */
+
+@media (max-width: 750px) {
+  .shop {
+    order: 8;
+  }
+
+  .opps {
+    order: 10;
+  }
+
+  .ready {
+    order: 11;
+  }
+
+  .icons {
+    order: 6;
+  }
+
+  .acsa {
+    order: 7;
+  }
+
+  .fashion {
+    order: 9;
+  }
+
+  .body {
+    font-size: 12px;
+  }
+
+  .big {
+    font-size: calc(0.0794009 * var(--u));
+  }
+
+  /* Hero */
+  .hero .heroInner {
+    grid-template-rows: minmax(calc(1.1521333 * var(--u)), auto);
+  }
+
+  .body > .headline {
+    width: 59.8703%;
+    margin: calc(0.343568 * var(--u)) 0 0 calc(0.030032 * var(--u));
+  }
+
+  .body > .heroPanel {
+    width: 99.0738%;
+    margin: calc(0.7021013 * var(--u)) 0 0 0;
+    grid-template-rows: minmax(calc(0.349168 * var(--u)), auto);
+  }
+
+  .heroPanel > .heroRule {
+    width: 100.673%;
+  }
+
+  .heroPanel > .heroCopy {
+    width: 94.2296%;
+    min-height: 122.41px;
+    margin: calc(0.0442334 * var(--u)) 0 0 calc(0.0377333 * var(--u));
+  }
+
+  .heroPanel > .heroJoin {
+    margin: calc(0.2309333 * var(--u)) 0 0 calc(0.0394 * var(--u));
+  }
+
+  .body .panel > .heroExplore {
+    justify-self: end;
+    margin: calc(0.2311667 * var(--u)) calc(0.1587333 * var(--u)) 0 0;
+  }
+
+  /* 6 ways */
+  .band .bandInner {
+    grid-template-rows: minmax(calc(0.1291667 * var(--u)), auto);
+  }
+
+  .body > .bandTitle {
+    align-self: center;
+    width: 64.3911%;
+    margin: 0 0 0 calc(0.0395333 * var(--u));
+    font-size: calc(0.0586667 * var(--u));
+  }
+
+  /* Cards */
+  .cardsGrid {
+    grid-template-rows:
+      minmax(calc(0.4350987 * var(--u)), auto)
+      minmax(calc(0.4128 * var(--u)), auto);
+  }
+
+  .card1 {
+    width: 90.348%;
+    margin: max(0.5px, calc(1e-7 * var(--u))) 0 0 calc(0.0013667 * var(--u));
+  }
+
+  .card2 {
+    justify-self: end;
+    width: 90.3391%;
+    margin: calc(0.0013667 * var(--u)) calc(0.0115333 * var(--u)) 0 0;
+  }
+
+  .card3 {
+    width: 90.3423%;
+    margin: 0 0 0 calc(0.0010667 * var(--u));
+  }
+
+  .card4 {
+    place-self: start;
+    width: 90.3334%;
+    margin: calc(0.0139333 * var(--u)) 0 0 calc(0.0148333 * var(--u));
+  }
+
+  .card5 {
+    place-self: start;
+    width: 90.3283%;
+    margin: calc(0.0139333 * var(--u)) 0 0 calc(0.0207 * var(--u));
+  }
+
+  .card6 {
+    place-self: start;
+    width: 90.3382%;
+    margin: calc(0.0139333 * var(--u)) 0 0 calc(0.0167667 * var(--u));
+  }
+
+  /* From talent */
+  .talent .talentInner {
+    grid-template-rows: minmax(calc(0.5126987 * var(--u)), auto);
+  }
+
+  .body > .talentTitle {
+    width: 87.09%;
+    margin: calc(0.0255653 * var(--u)) 0 0 calc(0.0378 * var(--u));
+  }
+
+  .body > .revenueTitle {
+    width: 87.09%;
+    margin: calc(0.1004 * var(--u)) 0 0 calc(0.0380333 * var(--u));
+  }
+
+  .body > .talentLead {
+    width: 37.1102%;
+    margin: calc(0.2163 * var(--u)) 0 0 calc(0.0377667 * var(--u));
+  }
+
+  /* Icons */
+  .icons .iconsInner {
+    grid-template-rows: minmax(calc(0.4773333 * var(--u)), auto);
+  }
+
+  .body > .iconsGallery {
+    --h: 151px;
+    width: 100.123%;
+  }
+
+  /* ACSA */
+  .acsa .acsaInner {
+    grid-template-rows: minmax(calc(1.0974667 * var(--u)), auto);
+  }
+
+  .body > .acsaKicker {
+    width: 55.7669%;
+    margin: calc(0.0194333 * var(--u)) 0 0 calc(0.0752167 * var(--u));
+  }
+
+  .body > .acsaLogo {
+    width: 76.1824%;
+    aspect-ratio: 1 / 0.33474;
+    margin: calc(0.1025334 * var(--u)) 0 0 calc(0.0103333 * var(--u));
+  }
+
+  .body > .acsaLead {
+    width: 80.2872%;
+    margin: calc(0.3664667 * var(--u)) 0 0 calc(0.0592 * var(--u));
+  }
+
+  .body > .acsaBox {
+    width: 104.211%;
+    min-height: calc(0.4708 * var(--u));
+    margin: calc(0.4926333 * var(--u)) 0 0 calc(-0.0233667 * var(--u));
+  }
+
+  .body > .courses {
+    width: 82.9524%;
+    margin: calc(0.5156987 * var(--u)) 0 0 calc(0.0545653 * var(--u));
+    margin-inline-start: calc(calc(0.0545653 * var(--u)) + 0.5em);
+  }
+
+  .body > .acsaBtn {
+    margin: calc(0.9186667 * var(--u)) 0 0 calc(0.0592 * var(--u));
+  }
+
+  /* Shop */
+  .shop .shopInner {
+    grid-template-rows: minmax(calc(0.4625653 * var(--u)), auto);
+  }
+
+  .body > .shopTitle,
+  .body > .oppsTitle,
+  .body > .readyTitle {
+    width: 87.09%;
+    margin: calc(0.0255653 * var(--u)) 0 0 calc(0.0378 * var(--u));
+  }
+
+  .body > .shopLead {
+    width: 84.0185%;
+    margin: calc(0.121032 * var(--u)) 0 0 calc(0.0378667 * var(--u));
+  }
+
+  .body > .shopBtn {
+    margin: calc(0.3081 * var(--u)) 0 0 calc(0.0592 * var(--u));
+  }
+
+  /* Opportunities */
+  .opps .oppsInner {
+    grid-template-rows: minmax(calc(1.0522667 * var(--u)), auto);
+  }
+
+  .body > .oppsLead {
+    width: 84.0185%;
+    margin: calc(0.2163013 * var(--u)) 0 0 calc(0.037832 * var(--u));
+  }
+
+  .body > .mapsGallery {
+    --h: 170px;
+    width: 100.123%;
+    margin: 38.1663% 0 0 -0.123268%;
+  }
+
+  .body > .oppsBtn {
+    margin: calc(0.8690333 * var(--u)) 0 0 calc(0.0592 * var(--u));
+  }
+
+  /* Ready */
+  .ready .readyInner {
+    grid-template-rows: minmax(calc(0.7261653 * var(--u)), auto);
+  }
+
+  .body > .readyLead {
+    width: 87.0869%;
+    margin: calc(0.2386 * var(--u)) 0 0 calc(0.0467333 * var(--u));
+  }
+
+  .body > .readyJoin {
+    margin: calc(0.4042667 * var(--u)) 0 0 calc(0.0592333 * var(--u));
+  }
+
+  .body > .readyExplore {
+    margin: calc(0.5456 * var(--u)) 0 0 calc(0.0592667 * var(--u));
+  }
+}
