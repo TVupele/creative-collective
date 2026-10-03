@@ -872,6 +872,11 @@
 .marquee {
   position: relative;
   overflow: hidden;
+  /* Horizontal drags move the strip; vertical swipes still scroll the page. */
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
   /* --gh: gallery box height, when Wix makes it taller than the items. */
   height: var(--gh, var(--h));
 }
@@ -880,11 +885,7 @@
   display: flex;
   width: max-content;
   height: var(--h);
-  animation: marquee var(--duration) linear infinite;
-}
-
-.marquee:hover .track {
-  animation-play-state: paused;
+  will-change: transform;
 }
 
 .track > * {
@@ -909,31 +910,14 @@
 
 .marqueeRtl .track {
   flex-direction: row-reverse;
-  animation-name: marqueeRtl;
 }
 
-@keyframes marqueeRtl {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(50%);
-  }
+.marquee:active {
+  cursor: grabbing;
 }
 
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .track {
-    animation: none;
-  }
+.track img {
+  -webkit-user-drag: none;
 }
 
 /* ======================================================================= */
